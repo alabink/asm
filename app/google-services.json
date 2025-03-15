@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "215223684771",
+    "project_id": "concac-948eb",
+    "storage_bucket": "concac-948eb.firebasestorage.app"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:215223684771:android:49dfd12c17cbac48f57916",
+        "android_client_info": {
+          "package_name": "com.example.todolistse06302"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyA8cxxVW19vOrJz7Q8vrmljDucfMR9Q0QA"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
