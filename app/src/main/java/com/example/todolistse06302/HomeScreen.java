@@ -3,16 +3,19 @@ package com.example.todolistse06302;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
+import android.view.MenuItem;
 import android.widget.Button;
 
 import androidx.activity.EdgeToEdge;
+import androidx.annotation.NonNull;
 import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 
+import com.google.android.material.bottomnavigation.BottomNavigationView;
 import com.google.firebase.auth.FirebaseAuth;
 
 public class HomeScreen extends AppCompatActivity {
-    private Button btnLogout;
+    private Button btnManageExpenses;
     private FirebaseAuth mAuth;
     private SharedPreferences sharedPreferences;
 
@@ -25,28 +28,31 @@ public class HomeScreen extends AppCompatActivity {
         mAuth = FirebaseAuth.getInstance();
         sharedPreferences = getSharedPreferences("MyPrefs", MODE_PRIVATE);
 
-        btnLogout = findViewById(R.id.btnLogout);
+        btnManageExpenses = findViewById(R.id.btnManageExpenses);
 
-        btnLogout.setOnClickListener(view -> showLogoutConfirmation());
-    }
 
-    private void showLogoutConfirmation() {
-        AlertDialog.Builder builder = new AlertDialog.Builder(this);
-        builder.setTitle("Logout Confirmation");
-        builder.setMessage("Are you sure you want to logout?");
+        btnManageExpenses.setOnClickListener(view -> {
+            Intent intent = new Intent(HomeScreen.this, ManageExpenseActivity.class);
+            startActivity(intent);
+        });
 
-        builder.setPositiveButton("Yes", (dialog, which) -> logoutUser());
-        builder.setNegativeButton("No", (dialog, which) -> dialog.dismiss());
-        builder.create().show();
-    }
+        // Xử lý sự kiện cho BottomNavigationView
+        BottomNavigationView bottomNavigationView = findViewById(R.id.bottomNavigation);
 
-    private void logoutUser() {
-        mAuth.signOut();
-        SharedPreferences.Editor editor = sharedPreferences.edit();
-        editor.putBoolean("isLoggedIn", false);
-        editor.apply();
-        Intent intent = new Intent(HomeScreen.this, MainActivity.class);
-        startActivity(intent);
-        finish();
+        bottomNavigationView.setOnItemSelectedListener(item -> {
+            if (item.getItemId() == R.id.navigation_home) {
+                // Hiện tại đã ở Home, không cần làm gì
+                return true;
+            } else if (item.getItemId() == R.id.navigation_expenses) {
+                // Chuyển đến Activity Manage Expense
+                startActivity(new Intent(HomeScreen.this, ManageExpenseActivity.class));
+                return true;
+            } else if (item.getItemId() == R.id.navigation_profile) {
+                // Chuyển đến Activity Profile khi user click vào
+                startActivity(new Intent(HomeScreen.this, Profile.class));
+                return true;
+            }
+            return false;
+        });
     }
 }

@@ -39,7 +39,7 @@ public class MainActivity extends AppCompatActivity {
         // Kiểm tra nếu đã đăng nhập trước đó
         if (sharedPreferences.getBoolean("isLoggedIn", false)) {
             txtError.setText("You're already logged in!");
-            txtError.setVisibility(View.VISIBLE);
+            txtError.setVisibility(View.GONE);
         }
 
         btnLogin.setOnClickListener(view -> loginUser());
