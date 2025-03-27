@@ -51,6 +51,10 @@ public class HomeScreen extends AppCompatActivity {
                 // Chuyển đến Activity Profile khi user click vào
                 startActivity(new Intent(HomeScreen.this, Profile.class));
                 return true;
+            } else if (item.getItemId() == R.id.navigation_setbugdget) {
+                // Chuyển đến Activity Profile khi user click vào
+                startActivity(new Intent(HomeScreen.this, SetBudgetActivity.class));
+                return true;
             }
             return false;
         });

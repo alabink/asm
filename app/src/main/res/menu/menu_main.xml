@@ -11,4 +11,8 @@
         android:id="@+id/navigation_profile"
         android:icon="@drawable/ic_profile"
         android:title="Profile" />
+    <item
+        android:id="@+id/navigation_setbugdget"
+        android:icon="@drawable/ic_expense"
+        android:title="Set Budget" />
 </menu>
