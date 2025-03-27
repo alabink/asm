@@ -24,4 +24,14 @@ public class Expense {
 
     public String getDate() { return date; }
     public void setDate(String date) { this.date = date; }
+
+    // ✅ Thêm phương thức mới: Hiển thị thông tin chi tiêu
+    public String getExpenseInfo() {
+        return "ID: " + id + ", Số tiền: " + amount + " VND, Danh mục: " + category + ", Ngày: " + date;
+    }
+
+    // ✅ Thêm phương thức so sánh chi tiêu
+    public boolean isExpensive(double threshold) {
+        return this.amount > threshold;
+    }
 }

@@ -3,4 +3,8 @@
     <string name="home">Home</string>
     <string name="expenses">Expenses</string>
     <string name="profile">Profile</string>
+    <string-array name="time_period_options">
+        <item>Hàng tháng</item>
+        <item>Hàng năm</item>
+    </string-array>
 </resources>
