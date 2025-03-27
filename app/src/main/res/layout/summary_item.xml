@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:orientation="horizontal"
+    android:padding="8dp"
+    android:background="@android:color/white">
+
+    <TextView
+        android:id="@+id/txtCategory"
+        android:layout_width="0dp"
+        android:layout_weight="1"
+        android:layout_height="wrap_content"
+        android:text="Danh mục"
+        android:textSize="16sp"
+        android:textStyle="bold" />
+
+    <TextView
+        android:id="@+id/txtAmount"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Số tiền"
+        android:textSize="16sp"
+        android:textStyle="bold" />
+</LinearLayout>

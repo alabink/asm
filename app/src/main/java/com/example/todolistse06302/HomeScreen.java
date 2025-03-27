@@ -3,19 +3,16 @@ package com.example.todolistse06302;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
-import android.view.MenuItem;
 import android.widget.Button;
 
 import androidx.activity.EdgeToEdge;
-import androidx.annotation.NonNull;
-import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 import com.google.firebase.auth.FirebaseAuth;
 
 public class HomeScreen extends AppCompatActivity {
-    private Button btnManageExpenses;
+    private Button btnManageExpenses, btncost,btnreport;
     private FirebaseAuth mAuth;
     private SharedPreferences sharedPreferences;
 
@@ -29,26 +26,38 @@ public class HomeScreen extends AppCompatActivity {
         sharedPreferences = getSharedPreferences("MyPrefs", MODE_PRIVATE);
 
         btnManageExpenses = findViewById(R.id.btnManageExpenses);
+        btncost = findViewById(R.id.btncost); // Tìm button btncost
+        btnreport = findViewById(R.id.btnreport);
 
-
+        // Chuyển đến ManageExpenseActivity khi nhấn btnManageExpenses
         btnManageExpenses.setOnClickListener(view -> {
             Intent intent = new Intent(HomeScreen.this, ManageExpenseActivity.class);
             startActivity(intent);
         });
+
+
+        // Chuyển đến DashboardActivity khi nhấn btncost
+        btncost.setOnClickListener(view -> {
+            Intent intent = new Intent(HomeScreen.this, DashboardActivity.class);
+            startActivity(intent);
+        });
+
+        btnreport.setOnClickListener(view -> {
+            Intent intent = new Intent(HomeScreen.this, Report.class);
+            startActivity(intent);
+        });
+
 
         // Xử lý sự kiện cho BottomNavigationView
         BottomNavigationView bottomNavigationView = findViewById(R.id.bottomNavigation);
 
         bottomNavigationView.setOnItemSelectedListener(item -> {
             if (item.getItemId() == R.id.navigation_home) {
-                // Hiện tại đã ở Home, không cần làm gì
                 return true;
             } else if (item.getItemId() == R.id.navigation_expenses) {
-                // Chuyển đến Activity Manage Expense
                 startActivity(new Intent(HomeScreen.this, ManageExpenseActivity.class));
                 return true;
             } else if (item.getItemId() == R.id.navigation_profile) {
-                // Chuyển đến Activity Profile khi user click vào
                 startActivity(new Intent(HomeScreen.this, Profile.class));
                 return true;
             }
