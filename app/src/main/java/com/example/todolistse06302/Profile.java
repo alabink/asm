@@ -42,6 +42,10 @@ public class Profile extends AppCompatActivity {
                 // Chuyển đến Activity HomeScreen khi user click vào
                 startActivity(new Intent(Profile.this, HomeScreen.class));
                 return true;
+            }else if (item.getItemId() == R.id.navigation_ChiPhi) {
+                // Chuyển sang Activity ChiPhi
+                startActivity(new Intent(Profile.this, RecurringExpenseActivity.class));
+                return true;
             }
             return false;
         });

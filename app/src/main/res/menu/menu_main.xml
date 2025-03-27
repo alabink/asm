@@ -8,6 +8,10 @@
         android:icon="@drawable/ic_expense"
         android:title="Expenses" />
     <item
+        android:id="@+id/navigation_ChiPhi"
+        android:icon="@drawable/ic_chiphi1"
+        android:title="ChiPhi" />
+    <item
         android:id="@+id/navigation_profile"
         android:icon="@drawable/ic_profile"
         android:title="Profile" />

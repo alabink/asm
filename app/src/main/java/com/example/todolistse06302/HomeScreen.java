@@ -47,6 +47,10 @@ public class HomeScreen extends AppCompatActivity {
                 // Chuyển đến Activity Manage Expense
                 startActivity(new Intent(HomeScreen.this, ManageExpenseActivity.class));
                 return true;
+            }else if (item.getItemId() == R.id.navigation_ChiPhi) {
+                // Chuyển sang Activity ChiPhi
+                startActivity(new Intent(HomeScreen.this, RecurringExpenseActivity.class));
+                return true;
             } else if (item.getItemId() == R.id.navigation_profile) {
                 // Chuyển đến Activity Profile khi user click vào
                 startActivity(new Intent(HomeScreen.this, Profile.class));

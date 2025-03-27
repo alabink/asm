@@ -18,6 +18,9 @@ import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.List;
 
+import androidx.appcompat.app.AppCompatActivity;
+
+
 public class ManageExpenseActivity extends AppCompatActivity {
 
     private EditText editAmount, editCategory, editDate;
@@ -108,9 +111,14 @@ public class ManageExpenseActivity extends AppCompatActivity {
                 // Chuyển sang Activity Profile
                 startActivity(new Intent(ManageExpenseActivity.this, Profile.class));
                 return true;
+            } else if (item.getItemId() == R.id.navigation_ChiPhi) {
+                // Chuyển sang Activity ChiPhi
+                startActivity(new Intent(ManageExpenseActivity.this, RecurringExpenseActivity.class));
+                return true;
             }
             return false;
         });
+
     }
 
     // Hiển thị DatePickerDialog
