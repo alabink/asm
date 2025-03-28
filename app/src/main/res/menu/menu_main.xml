@@ -8,11 +8,12 @@
         android:icon="@drawable/ic_expense"
         android:title="Expenses" />
     <item
+        android:id="@+id/navigation_budget"
+        android:icon="@drawable/ic_budget"
+        android:title="Budget"/>
+    <item
         android:id="@+id/navigation_profile"
         android:icon="@drawable/ic_profile"
         android:title="Profile" />
-    <item
-        android:id="@+id/navigation_setbugdget"
-        android:icon="@drawable/ic_expense"
-        android:title="Set Budget" />
+
 </menu>

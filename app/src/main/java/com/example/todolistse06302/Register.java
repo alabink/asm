@@ -24,6 +24,7 @@ public class Register extends AppCompatActivity {
     private EditText editEmailRegister, editPasswordRegister;
     private Button btnSubmitRegister;
     private FirebaseAuth mAuth;
+    private DatabaseHelper databaseHelper;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -32,6 +33,7 @@ public class Register extends AppCompatActivity {
         setContentView(R.layout.activity_register);
 
         mAuth = FirebaseAuth.getInstance();
+        databaseHelper = new DatabaseHelper(this);
 
         editEmailRegister = findViewById(R.id.editEmailRegister);
         editPasswordRegister = findViewById(R.id.editPasswordRegister);
@@ -62,10 +64,16 @@ public class Register extends AppCompatActivity {
                         if (task.isSuccessful()) {
                             Log.d(TAG, "createUserWithEmail:success");
                             FirebaseUser user = mAuth.getCurrentUser();
-                            DatabaseHelper databaseHelper=new DatabaseHelper(Register.this);
-                            databaseHelper.addUser(email,password);
-                            Toast.makeText(Register.this, "Registration successful", Toast.LENGTH_SHORT).show();
-                            updateUI(user);
+
+                            try {
+                                // Add exception handling for addUser method
+                                databaseHelper.addUser(email, password);
+                                Toast.makeText(Register.this, "Registration successful", Toast.LENGTH_SHORT).show();
+                                updateUI(user);
+                            } catch (Exception e) {
+                                Log.e(TAG, "Error adding user to local database", e);
+                                Toast.makeText(Register.this, "Local database registration failed: " + e.getMessage(), Toast.LENGTH_SHORT).show();
+                            }
                         } else {
                             Log.w(TAG, "createUserWithEmail:failure", task.getException());
                             Toast.makeText(Register.this, "Authentication failed: " + task.getException().getMessage(), Toast.LENGTH_SHORT).show();
