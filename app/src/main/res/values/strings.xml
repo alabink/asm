@@ -3,4 +3,5 @@
     <string name="home">Home</string>
     <string name="expenses">Expenses</string>
     <string name="profile">Profile</string>
+    <string name="category_prompt">Select Category</string>
 </resources>

@@ -19,8 +19,7 @@
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        android:layout_marginTop="32dp"
-        />
+        android:layout_marginTop="32dp" />
 
     <!-- Logo/Image -->
     <ImageView
@@ -36,7 +35,7 @@
 
     <!-- Manage Expenses Button -->
     <com.google.android.material.button.MaterialButton
-        android:id="@+id/btnManageExpenses"
+        android:id="@+id/btnManageExpense"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:text="Manage Expenses"
@@ -45,6 +44,22 @@
         app:cornerRadius="12dp"
         app:icon="@drawable/ic_manage"
         app:layout_constraintTop_toBottomOf="@id/imageView"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        android:layout_marginTop="16dp"
+        android:layout_marginHorizontal="32dp" />
+
+    <!-- Logout Button -->
+    <com.google.android.material.button.MaterialButton
+        android:id="@+id/btnLogout"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:text="Logout"
+        android:textSize="16sp"
+        android:textColor="@android:color/white"
+        app:cornerRadius="12dp"
+        app:icon="@drawable/ic_logout"
+        app:layout_constraintTop_toBottomOf="@id/btnManageExpense"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         android:layout_marginTop="16dp"
@@ -61,6 +76,5 @@
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent" />
-
 
 </androidx.constraintlayout.widget.ConstraintLayout>

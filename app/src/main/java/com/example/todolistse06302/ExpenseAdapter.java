@@ -6,16 +6,29 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.BaseAdapter;
 import android.widget.TextView;
-
+import android.graphics.Color;
+import java.text.DecimalFormat;
+import java.text.NumberFormat;
 import java.util.List;
+import java.util.Locale;
 
 public class ExpenseAdapter extends BaseAdapter {
     private Context context;
     private List<Expense> expenses;
+    private NumberFormat currencyFormatter;
+    private DecimalFormat decimalFormat;
 
     public ExpenseAdapter(Context context, List<Expense> expenses) {
         this.context = context;
         this.expenses = expenses;
+        
+        // Create currency formatter for VND without scientific notation
+        this.currencyFormatter = NumberFormat.getCurrencyInstance(new Locale("vi", "VN"));
+        this.decimalFormat = new DecimalFormat("#,###");
+        decimalFormat.setGroupingUsed(true);
+        if (currencyFormatter instanceof DecimalFormat) {
+            ((DecimalFormat) currencyFormatter).setDecimalSeparatorAlwaysShown(false);
+        }
     }
 
     @Override
@@ -45,7 +58,9 @@ public class ExpenseAdapter extends BaseAdapter {
         TextView txtCategory = view.findViewById(R.id.txtCategory);
         TextView txtDate = view.findViewById(R.id.txtDate);
 
-        txtAmount.setText(String.valueOf(expense.getAmount()));
+        // Format amount with grouping and VND currency
+        String formattedAmount = decimalFormat.format(expense.getAmount()) + " ₫";
+        txtAmount.setText(formattedAmount);
         txtCategory.setText(expense.getCategory());
         txtDate.setText(expense.getDate());
 
