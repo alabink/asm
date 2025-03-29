@@ -10,14 +10,17 @@ import androidx.annotation.Nullable;
 
 import com.example.todolistse06302.RecurringExpense;
 
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Calendar;
 import java.util.List;
+import java.util.Locale;
 
 
 public class DatabaseHelper extends SQLiteOpenHelper {
 
     private static final String DATABASE_NAME = "concac";
-    private static final int DATABASE_VERSION = 4;
+    private static final int DATABASE_VERSION = 13;
 
     // User table
     private static final String TABLE_USERS = "users";
@@ -60,7 +63,7 @@ public class DatabaseHelper extends SQLiteOpenHelper {
         db.execSQL(CREATE_EXPENSES_TABLE);
 
         String createTable = "CREATE TABLE " + TABLE_RECURRING + " (" +
-                COLUMN_ID + " INTEGER PRIMARY KEY AUTOINCREMENT, " +
+                COLUMN_RECURRING_ID + " INTEGER PRIMARY KEY AUTOINCREMENT, " +
                 COLUMN_NAME + " TEXT, " +
                 COLUMN_AMOUNTT + " REAL, " +
                 COLUMN_START_DATE + " TEXT, " +
@@ -151,7 +154,7 @@ public class DatabaseHelper extends SQLiteOpenHelper {
         SQLiteDatabase db = this.getWritableDatabase();
         ContentValues values = new ContentValues();
         values.put(COLUMN_NAME, name);
-        values.put(COLUMN_AMOUNT, amount);
+        values.put(COLUMN_AMOUNTT, amount);
         values.put(COLUMN_START_DATE, startDate);
         values.put(COLUMN_END_DATE, endDate);
         db.insert(TABLE_RECURRING, null, values);
@@ -165,14 +168,13 @@ public class DatabaseHelper extends SQLiteOpenHelper {
 
         if (cursor.moveToFirst()) {
             do {
-                RecurringExpense expense = new RecurringExpense(
-                        cursor.getInt(0),
-                        cursor.getString(1),
-                        cursor.getDouble(2),
-                        cursor.getString(3),
-                        cursor.getString(4)
-                );
-                expenses.add(expense);
+                int id = cursor.getInt(cursor.getColumnIndexOrThrow(COLUMN_RECURRING_ID));
+                String name = cursor.getString(cursor.getColumnIndexOrThrow(COLUMN_NAME));
+                double amount = cursor.getDouble(cursor.getColumnIndexOrThrow(COLUMN_AMOUNTT));
+                String startDate = cursor.getString(cursor.getColumnIndexOrThrow(COLUMN_START_DATE));
+                String endDate = cursor.getString(cursor.getColumnIndexOrThrow(COLUMN_END_DATE));
+
+                expenses.add(new RecurringExpense(id, name, amount, startDate, endDate));
             } while (cursor.moveToNext());
         }
         cursor.close();
@@ -187,17 +189,44 @@ public class DatabaseHelper extends SQLiteOpenHelper {
         values.put("start_date", startdate);
         values.put("end_date", enddate);
 
-        db.update("RecurringExpenses", values, "id=?", new String[]{String.valueOf(id)});
+        db.update(TABLE_RECURRING, values, COLUMN_RECURRING_ID + "=?", new String[]{String.valueOf(id)});
         db.close();
     }
 
     // Delete Expense
     public void deleteCost(int id) {
         SQLiteDatabase db = this.getWritableDatabase();
-        db.delete("RecurringExpenses", "id=?", new String[]{String.valueOf(id)}); // Xóa theo ID
+        db.delete(TABLE_RECURRING, COLUMN_RECURRING_ID + "=?", new String[]{String.valueOf(id)});
         db.close();
     }
 
+    public List<RecurringExpense> getExpiringRecurringExpenses(int daysBefore) {
+        List<RecurringExpense> expiringExpenses = new ArrayList<>();
+        SQLiteDatabase db = this.getReadableDatabase();
+
+        Calendar calendar = Calendar.getInstance();
+        calendar.add(Calendar.DAY_OF_MONTH, daysBefore);
+        SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy", Locale.getDefault());
+        String targetDate = sdf.format(calendar.getTime());
+
+        Cursor cursor = db.rawQuery("SELECT * FROM " + TABLE_RECURRING + " WHERE date(" + COLUMN_END_DATE + ") <= date(?)", new String[]{targetDate});
+
+
+        if (cursor.moveToFirst()) {
+            do {
+                int id = cursor.getInt(0);
+                String name = cursor.getString(1);
+                double amount = cursor.getDouble(2);
+                String startDate = cursor.getString(3);
+                String endDate = cursor.getString(4);
+
+                expiringExpenses.add(new RecurringExpense(id, name, amount, startDate, endDate));
+            } while (cursor.moveToNext());
+        }
+        cursor.close();
+        db.close();
+        return expiringExpenses;
+    }
 
     @Override
     public void onUpgrade(SQLiteDatabase db, int oldVersion, int newVersion) {
