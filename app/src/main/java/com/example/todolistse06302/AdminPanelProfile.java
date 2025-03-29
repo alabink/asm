@@ -10,6 +10,9 @@ import android.widget.TextView;
 import androidx.activity.EdgeToEdge;
 import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.core.graphics.Insets;
+import androidx.core.view.ViewCompat;
+import androidx.core.view.WindowInsetsCompat;
 
 import com.example.todolistse06302.database.DatabaseHelper;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
@@ -17,7 +20,7 @@ import com.google.android.material.button.MaterialButton;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 
-public class AdminDashboard extends AppCompatActivity {
+public class AdminPanelProfile extends AppCompatActivity {
     private MaterialButton btnManageUser, btnViewUserExpenses, btnLogout;
     private TextView welcomeUser;
     private FirebaseAuth mAuth;
@@ -27,16 +30,14 @@ public class AdminDashboard extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         EdgeToEdge.enable(this);
-        setContentView(R.layout.activity_admin_dashboard);
-
+        setContentView(R.layout.activity_admin_panel_profile);
         mAuth = FirebaseAuth.getInstance();
         sharedPreferences = getSharedPreferences("MyPrefs", MODE_PRIVATE);
         welcomeUser = findViewById(R.id.welcomeUser);
         displayUserEmail();
-
         btnManageUser = findViewById(R.id.btnManageUsers);
         btnManageUser.setOnClickListener(v -> {
-            startActivity(new Intent(AdminDashboard.this, AdminPanelActivity.class));
+            startActivity(new Intent(AdminPanelProfile.this, AdminPanelActivity.class));
         });
         btnViewUserExpenses = findViewById(R.id.btnViewUserExpenses);
         btnLogout = findViewById(R.id.btnLogout);
@@ -45,27 +46,29 @@ public class AdminDashboard extends AppCompatActivity {
 
         // Xử lý sự kiện cho BottomNavigationView
         BottomNavigationView bottomNavigationView = findViewById(R.id.bottomNavigation);
+        bottomNavigationView.setSelectedItemId(R.id.navigation_profile);
         bottomNavigationView.setOnItemSelectedListener(item -> {
             int itemId = item.getItemId();
-            if (itemId == R.id.navigation_home) {
-                // Hiện tại đã ở Home, không cần làm gì
+            if (itemId == R.id.navigation_profile) {
+                // Hiện tại đã ở Profile, không cần làm gì
                 return true;
             } else if (itemId == R.id.navigation_manage_users) {
                 // Chuyển đến Activity Manage Expense
-                startActivity(new Intent(AdminDashboard.this, AdminPanelActivity.class));
+                startActivity(new Intent(AdminPanelProfile.this, AdminPanelActivity.class));
                 return true;
-            } else if (itemId == R.id.navigation_profile) {
-                // Chuyển đến Activity Profile khi user click vào
-                startActivity(new Intent(AdminDashboard.this, AdminPanelProfile.class));
+            } else if (itemId == R.id.navigation_home) {
+                // Chuyển đến Activity Home khi user click vào
+                startActivity(new Intent(AdminPanelProfile.this, AdminDashboard.class));
                 return true;
-            } else if (itemId == R.id.navigation_budget) {
+            } else if (itemId == R.id.navigation_view_users_expenses) {
                 // Chuyển đến Activity ManageBudgetActivity
-                startActivity(new Intent(AdminDashboard.this, AdminDashboard.class));
+                startActivity(new Intent(AdminPanelProfile.this, AdminDashboard.class));
                 return true;
             }
             return false;
         });
     }
+
     // Phương thức hiển thị email
     private void displayUserEmail() {
         // Thử lấy email từ Firebase trước
@@ -102,7 +105,7 @@ public class AdminDashboard extends AppCompatActivity {
             }
         } else {
             // Nếu không tìm thấy, quay về màn hình đăng nhập
-            Intent intent = new Intent(AdminDashboard.this, MainActivity.class);
+            Intent intent = new Intent(AdminPanelProfile.this, MainActivity.class);
             intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
             startActivity(intent);
             finish();
@@ -126,7 +129,7 @@ public class AdminDashboard extends AppCompatActivity {
                     }
 
                     // Chuyển về màn hình đăng nhập
-                    Intent intent = new Intent(AdminDashboard.this, MainActivity.class);
+                    Intent intent = new Intent(AdminPanelProfile.this, MainActivity.class);
                     intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
                     startActivity(intent);
                     finish();
