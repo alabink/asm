@@ -12,8 +12,8 @@ drawable baseline_password_24
 drawable bgr_bg
 drawable cem
 drawable cemnoback
-drawable chiphi1
 drawable ic_budget
+drawable ic_chiphi1
 drawable ic_expense
 drawable ic_home
 drawable ic_launcher_background
@@ -130,7 +130,6 @@ menu menu_main
 mipmap ic_launcher
 mipmap ic_launcher_round
 string app_name
-string category_prompt
 string expenses
 string gcm_defaultSenderId
 string google_api_key

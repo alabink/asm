@@ -20,7 +20,6 @@
     <color name="black">#FF000000</color>
     <color name="white">#FFFFFFFF</color>
     <string name="app_name">ToDoListSE06302</string>
-    <string name="category_prompt">Select Category</string>
     <string name="expenses">Expenses</string>
     <string name="gcm_defaultSenderId" translatable="false">215223684771</string>
     <string name="google_api_key" translatable="false">AIzaSyA8cxxVW19vOrJz7Q8vrmljDucfMR9Q0QA</string>
