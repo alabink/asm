@@ -18,6 +18,7 @@ import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 
 public class AdminDashboard extends AppCompatActivity {
+
     private MaterialButton btnManageUser, btnViewUserExpenses;
     private TextView welcomeUser;
     private FirebaseAuth mAuth;
@@ -40,7 +41,6 @@ public class AdminDashboard extends AppCompatActivity {
         });
         btnViewUserExpenses = findViewById(R.id.btnViewUserExpenses);
 
-
         // Xử lý sự kiện cho BottomNavigationView
         BottomNavigationView bottomNavigationView = findViewById(R.id.bottomNavigation);
         bottomNavigationView.setOnItemSelectedListener(item -> {
@@ -54,6 +54,7 @@ public class AdminDashboard extends AppCompatActivity {
                 return true;
             } else if (itemId == R.id.navigation_profile) {
                 // Chuyển đến Activity Profile khi user click vào
+                //chon 1 cai thoi lay cai iten dash boảd hay adminpanel
                 startActivity(new Intent(AdminDashboard.this, AdminPanelProfile.class));
                 return true;
             } else if (itemId == R.id.navigation_budget) {
@@ -106,5 +107,6 @@ public class AdminDashboard extends AppCompatActivity {
             finish();
         }
     }
+
 }
 //dbl code done

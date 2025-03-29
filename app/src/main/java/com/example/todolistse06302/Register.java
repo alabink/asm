@@ -52,7 +52,7 @@ public class Register extends AppCompatActivity {
             return;
         }
 
-        // Tạo người dùng trong firebase
+
         mAuth.createUserWithEmailAndPassword(email, password)
                 .addOnCompleteListener(this, new OnCompleteListener<AuthResult>() {
                     @Override
@@ -75,6 +75,7 @@ public class Register extends AppCompatActivity {
             if (userId != -1) {
                 Toast.makeText(this, "Registration successful", Toast.LENGTH_SHORT).show();
                 finish(); // trở về đăng nhập
+
             } else {
                 Toast.makeText(this, "Registration failed in local database", Toast.LENGTH_SHORT).show();
             }
@@ -85,4 +86,4 @@ public class Register extends AppCompatActivity {
     }
 }
 
-//dbl code done
+

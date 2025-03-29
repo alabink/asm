@@ -28,15 +28,15 @@ public class ShowUsersActivity extends AppCompatActivity {
         List<String[]> users = databaseHelper.getUsers();
 
         // Định dạng dữ liệu người dùng thành string
+
         String[] userStrings = new String[users.size()];
         for (int i = 0; i < users.size(); i++) {
             userStrings[i] = "Email: " + users.get(i)[0] + "\nPassword: " + users.get(i)[1];
         }
 
-        // Hiện thị sử dụng ArrayAdapter
+
         ArrayAdapter<String> adapter = new ArrayAdapter<>(this, android.R.layout.simple_list_item_1, userStrings);
         listViewUsers.setAdapter(adapter);
     }
 }
 
-//dbl code done
