@@ -1,6 +1,7 @@
 package com.example.todolistse06302;
 
 import android.content.Context;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -45,10 +46,11 @@ public class UserAdapter extends BaseAdapter {
 
             EditText txtEmail = view.findViewById(R.id.editEmailRegister);
             txtEmail.setText(user.getEmail());
-
+            Log.i("abc","xyz");
             EditText txtPassword = view.findViewById(R.id.editPasswordRegister);
             txtPassword.setText(user.getPassword());
         }
         return view;
     }
 }
+//dbl code done

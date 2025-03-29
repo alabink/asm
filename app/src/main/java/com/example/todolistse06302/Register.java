@@ -52,16 +52,16 @@ public class Register extends AppCompatActivity {
             return;
         }
 
-        // First create user in Firebase
+        // Tạo người dùng trong firebase
         mAuth.createUserWithEmailAndPassword(email, password)
                 .addOnCompleteListener(this, new OnCompleteListener<AuthResult>() {
                     @Override
                     public void onComplete(@NonNull Task<AuthResult> task) {
                         if (task.isSuccessful()) {
-                            // Firebase registration successful, now add to SQLite
+                            // Đăng kí firebase thành công , thêm vào SQLite
                             addUserToLocalDatabase(email, password);
                         } else {
-                            // If Firebase fails, try SQLite only
+                            // Nếu lỗi , thử SQLite
                             addUserToLocalDatabase(email, password);
                         }
                     }
@@ -70,11 +70,11 @@ public class Register extends AppCompatActivity {
 
     private void addUserToLocalDatabase(String email, String password) {
         try {
-            // Register user with default USER role
+            // Đăng kí người dùng role mặc định là user
             long userId = databaseHelper.addUser(email, password);
             if (userId != -1) {
                 Toast.makeText(this, "Registration successful", Toast.LENGTH_SHORT).show();
-                finish(); // Return to login screen
+                finish(); // trở về đăng nhập
             } else {
                 Toast.makeText(this, "Registration failed in local database", Toast.LENGTH_SHORT).show();
             }
@@ -84,3 +84,5 @@ public class Register extends AppCompatActivity {
         }
     }
 }
+
+//dbl code done
