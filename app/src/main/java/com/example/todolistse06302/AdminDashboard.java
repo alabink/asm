@@ -18,7 +18,7 @@ import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 
 public class AdminDashboard extends AppCompatActivity {
-    private MaterialButton btnManageUser, btnViewUserExpenses, btnLogout;
+    private MaterialButton btnManageUser, btnViewUserExpenses;
     private TextView welcomeUser;
     private FirebaseAuth mAuth;
     private SharedPreferences sharedPreferences;
@@ -39,9 +39,7 @@ public class AdminDashboard extends AppCompatActivity {
             startActivity(new Intent(AdminDashboard.this, AdminPanelActivity.class));
         });
         btnViewUserExpenses = findViewById(R.id.btnViewUserExpenses);
-        btnLogout = findViewById(R.id.btnLogout);
 
-        btnLogout.setOnClickListener(v -> showLogoutConfirmation());
 
         // Xử lý sự kiện cho BottomNavigationView
         BottomNavigationView bottomNavigationView = findViewById(R.id.bottomNavigation);
@@ -107,31 +105,5 @@ public class AdminDashboard extends AppCompatActivity {
             startActivity(intent);
             finish();
         }
-    }
-
-    // ✅ Di chuyển phương thức ra ngoài
-    private void showLogoutConfirmation() {
-        new AlertDialog.Builder(this)
-                .setTitle("Logout")
-                .setMessage("Are you sure you want to logout?")
-                .setPositiveButton("Yes", (dialog, which) -> {
-                    // Xóa SharedPreferences
-                    SharedPreferences.Editor editor = sharedPreferences.edit();
-                    editor.clear();
-                    editor.apply();
-
-                    // Đăng xuất Firebase
-                    if (mAuth.getCurrentUser() != null) {
-                        mAuth.signOut();
-                    }
-
-                    // Chuyển về màn hình đăng nhập
-                    Intent intent = new Intent(AdminDashboard.this, MainActivity.class);
-                    intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
-                    startActivity(intent);
-                    finish();
-                })
-                .setNegativeButton("No", null)
-                .show();
     }
 }

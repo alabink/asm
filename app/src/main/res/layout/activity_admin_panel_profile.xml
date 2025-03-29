@@ -9,6 +9,7 @@
     tools:context=".AdminPanelProfile">
 
     <!-- Welcome Text -->
+
     <TextView
         android:id="@+id/txtWelcome"
         android:layout_width="wrap_content"
@@ -20,14 +21,14 @@
         android:layout_marginTop="32dp" />
 
     <!-- Logo/Image -->
-    <ImageView
-        android:id="@+id/imageView"
-        android:layout_width="200dp"
-        android:layout_height="200dp"
-        android:scaleType="centerCrop"
-        app:srcCompat="@drawable/cemnoback"
-        android:layout_marginTop="16dp" />
     <!-- Welcome Text -->
+    <ImageView
+        android:id="@+id/imageView7"
+        android:layout_width="150dp"
+        android:layout_height="150dp"
+        android:layout_marginTop="20dp"
+        app:srcCompat="@drawable/user" />
+
     <TextView
         android:id="@+id/welcomeUser"
         android:layout_width="wrap_content"

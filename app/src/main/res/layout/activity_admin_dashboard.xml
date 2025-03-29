@@ -66,18 +66,6 @@
         android:layout_marginTop="16dp"
         android:layout_marginHorizontal="32dp" />
     <!-- Logout Button -->
-    <com.google.android.material.button.MaterialButton
-        android:id="@+id/btnLogout"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:text="Logout"
-        android:textSize="16sp"
-        android:textColor="@android:color/white"
-        android:backgroundTint="#EC7063"
-        app:cornerRadius="12dp"
-        app:icon="@drawable/ic_logout"
-        android:layout_marginTop="16dp"
-        android:layout_marginHorizontal="32dp" />
 
     <!-- Bottom Navigation View -->
     <FrameLayout
