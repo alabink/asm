@@ -67,3 +67,4 @@ public class ExpenseAdapter extends BaseAdapter {
         return view;
     }
 }
+
