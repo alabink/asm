@@ -4,8 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:orientation="vertical"
-    android:padding="16dp">
+    android:orientation="vertical">
 
     <ImageView
         android:id="@+id/imageView4"
@@ -30,11 +29,14 @@
         android:hint="Amount"
         android:inputType="numberDecimal" />
 
-    <EditText
-        android:id="@+id/editCategory"
+    <Spinner
+        android:id="@+id/spinnerCategory"
         android:layout_width="match_parent"
-        android:layout_height="56dp"
-        android:hint="Category" />
+        android:layout_height="61dp"
+        android:layout_marginTop="16dp"
+        android:background="@drawable/spinner_background"
+        android:spinnerMode="dropdown"
+        android:popupBackground="#FFFFFF" />
 
     <!-- Date Picker -->
     <EditText
@@ -78,5 +80,4 @@
         app:itemIconTint="@color/selector_bottom_nav"
         app:itemTextColor="@color/selector_bottom_nav"
         app:labelVisibilityMode="labeled" />
-
 </LinearLayout>

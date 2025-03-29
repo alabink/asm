@@ -2,178 +2,301 @@ package com.example.todolistse06302;
 
 import android.app.DatePickerDialog;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
+import android.text.TextUtils;
+import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ListView;
+import android.widget.Spinner;
 import android.widget.Toast;
-
-import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
-
 import com.example.todolistse06302.database.DatabaseHelper;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
-
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.List;
-
-//import androidx.appcompat.app.AppCompatActivity;
-
+import java.util.Locale;
 
 public class ManageExpenseActivity extends AppCompatActivity {
-
-    private EditText editAmount, editCategory, editDate;
+    private EditText editAmount, editDate;
+    private Spinner spinnerCategory;
     private Button btnAdd, btnUpdate, btnDelete;
     private ListView listViewExpenses;
     private DatabaseHelper dbHelper;
     private ExpenseAdapter adapter;
     private List<Expense> expenses;
     private int selectedExpenseId = -1;
+    private int currentUserId;
+    private Calendar calendar;
+    private List<String> categories;
+    private ArrayAdapter<String> categoryAdapter;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_manage_expense);
 
-        dbHelper = new DatabaseHelper(this);
+        // Get current user ID from SharedPreferences
+        SharedPreferences sharedPreferences = getSharedPreferences("MyPrefs", MODE_PRIVATE);
+        currentUserId = sharedPreferences.getInt("userId", -1);
 
+        if (currentUserId == -1) {
+            Toast.makeText(this, "Please login first", Toast.LENGTH_SHORT).show();
+            finish();
+            return;
+        }
+
+        initializeViews();
+        setupListeners();
+        loadExpenses();
+        loadCategories();
+    }
+
+    private void initializeViews() {
+        dbHelper = new DatabaseHelper(this);
         editAmount = findViewById(R.id.editAmount);
-        editCategory = findViewById(R.id.editCategory);
+        spinnerCategory = findViewById(R.id.spinnerCategory);
         editDate = findViewById(R.id.editDate);
         btnAdd = findViewById(R.id.btnAdd);
         btnUpdate = findViewById(R.id.btnUpdate);
         btnDelete = findViewById(R.id.btnDelete);
         listViewExpenses = findViewById(R.id.listViewExpenses);
+        calendar = Calendar.getInstance();
 
-        // Hiển thị DatePicker khi người dùng nhấn vào editDate
-        editDate.setOnClickListener(v -> showDatePickerDialog());
+        // Initialize categories list and adapter
+        categories = new ArrayList<>();
+        categoryAdapter = new ArrayAdapter<>(this, R.layout.spinner_item, categories);
+        categoryAdapter.setDropDownViewResource(R.layout.spinner_dropdown_item);
+        spinnerCategory.setAdapter(categoryAdapter);
+    }
 
-        loadExpenses();
+    private void loadCategories() {
+        categories.clear();
+        categories.add("Choose Category");
+        categories.addAll(dbHelper.getBudgetCategoriesForUser(currentUserId));
+        if (categories.size() == 1) {
+            categories.add("No budgets available");
+        }
+        categoryAdapter.notifyDataSetChanged();
+    }
 
-        // Thêm Expense
+    private void setupListeners() {
+        editDate.setOnClickListener(v -> showDatePicker());
+
         btnAdd.setOnClickListener(v -> {
-            double amount = Double.parseDouble(editAmount.getText().toString());
-            String category = editCategory.getText().toString();
-            String date = editDate.getText().toString();
+            if (validateInput()) {
+                try {
+                    double amount = Double.parseDouble(editAmount.getText().toString());
+                    String category = spinnerCategory.getSelectedItem().toString();
 
-            if (!category.isEmpty() && !date.isEmpty()) {
-                dbHelper.addExpense(amount, category, date);
-                loadExpenses();
-                Toast.makeText(this, "Add Successful !", Toast.LENGTH_SHORT).show();
-                clearInputFields();
-            }
-        });
+                    if ("Choose Category".equals(category) || "No budgets available".equals(category)) {
+                        Toast.makeText(this, "Please select a valid category", Toast.LENGTH_SHORT).show();
+                        return;
+                    }
 
-        // Cập nhật Expense
-        btnUpdate.setOnClickListener(v -> {
-            if (selectedExpenseId != -1) {
-                double amount = Double.parseDouble(editAmount.getText().toString());
-                String category = editCategory.getText().toString();
-                String date = editDate.getText().toString();
+                    String date = editDate.getText().toString();
 
-                if (!category.isEmpty() && !date.isEmpty()) {
-                    dbHelper.updateExpense(selectedExpenseId, amount, category, date);
+                    // Kiểm tra số dư ngân sách trước khi thêm expense
+                    double remainingBudget = dbHelper.getRemainingBudgetByCategory(category, currentUserId);
+                    if (amount > remainingBudget) {
+                        Toast.makeText(this, "Expense exceeds remaining budget", Toast.LENGTH_SHORT).show();
+                        return;
+                    }
+
+                    // Thêm expense và trừ ngân sách
+                    dbHelper.addExpense(amount, category, date, currentUserId);
+
+                    // Trừ ngân sách
+                    dbHelper.deductFromBudget(category, amount, currentUserId);
+
                     loadExpenses();
-                    Toast.makeText(this, "Update Successful !", Toast.LENGTH_SHORT).show();
                     clearInputFields();
+                    Toast.makeText(this, "Expense Added Successfully!", Toast.LENGTH_SHORT).show();
+                } catch (NumberFormatException e) {
+                    Toast.makeText(this, "Please enter a valid amount", Toast.LENGTH_SHORT).show();
+                } catch (Exception e) {
+                    Toast.makeText(this, "Error adding expense: " + e.getMessage(), Toast.LENGTH_SHORT).show();
                 }
             }
         });
 
-        // Xoá Expense (với AlertDialog xác nhận)
-        btnDelete.setOnClickListener(v -> {
-            if (selectedExpenseId != -1) {
-                showDeleteConfirmationDialog();
+        btnUpdate.setOnClickListener(v -> {
+            if (selectedExpenseId != -1 && validateInput()) {
+                try {
+                    // Lấy expense cũ
+                    Expense oldExpense = null;
+                    for (Expense e : expenses) {
+                        if (e.getId() == selectedExpenseId) {
+                            oldExpense = e;
+                            break;
+                        }
+                    }
+
+                    double newAmount = Double.parseDouble(editAmount.getText().toString());
+                    String category = spinnerCategory.getSelectedItem().toString();
+
+                    if ("Choose Category".equals(category) || "No budgets available".equals(category)) {
+                        Toast.makeText(this, "Please select a valid category", Toast.LENGTH_SHORT).show();
+                        return;
+                    }
+
+                    String date = editDate.getText().toString();
+
+                    // Kiểm tra số dư ngân sách
+                    double remainingBudget = dbHelper.getRemainingBudgetByCategory(category, currentUserId);
+                    double budgetDifference = newAmount - oldExpense.getAmount();
+
+                    if (budgetDifference > remainingBudget) {
+                        Toast.makeText(this, "Expense exceeds remaining budget", Toast.LENGTH_SHORT).show();
+                        return;
+                    }
+
+                    // Cập nhật expense
+                    dbHelper.updateExpense(selectedExpenseId, newAmount, category, date);
+
+                    // Điều chỉnh ngân sách
+                    dbHelper.deductFromBudget(category, budgetDifference, currentUserId);
+
+                    loadExpenses();
+                    clearInputFields();
+                    Toast.makeText(this, "Expense Updated Successfully!", Toast.LENGTH_SHORT).show();
+                } catch (Exception e) {
+                    Toast.makeText(this, "Error updating expense: " + e.getMessage(), Toast.LENGTH_SHORT).show();
+                }
             }
         });
 
-        // Xử lý sự kiện khi chọn Expense từ ListView
-        listViewExpenses.setOnItemClickListener((parent, view, position, id) -> {
-            Expense expense = expenses.get(position);
-            selectedExpenseId = expense.getId();
-            editAmount.setText(String.valueOf(expense.getAmount()));
-            editCategory.setText(expense.getCategory());
-            editDate.setText(expense.getDate());
+        btnDelete.setOnClickListener(v -> {
+            if (selectedExpenseId != -1) {
+                try {
+                    // Lấy expense sắp xóa
+                    Expense expenseToDelete = null;
+                    for (Expense e : expenses) {
+                        if (e.getId() == selectedExpenseId) {
+                            expenseToDelete = e;
+                            break;
+                        }
+                    }
+
+                    // Trả lại ngân sách về trạng thái ban đầu
+                    dbHelper.addBudgetAmountBack(expenseToDelete.getCategory(), expenseToDelete.getAmount(), currentUserId);
+
+                    // Xóa expense
+                    dbHelper.deleteExpense(selectedExpenseId);
+
+                    loadExpenses();
+                    clearInputFields();
+                    Toast.makeText(this, "Expense Deleted Successfully!", Toast.LENGTH_SHORT).show();
+                } catch (Exception e) {
+                    Toast.makeText(this, "Error deleting expense: " + e.getMessage(), Toast.LENGTH_SHORT).show();
+                }
+            } else {
+                Toast.makeText(this, "Please select an expense to delete", Toast.LENGTH_SHORT).show();
+            }
         });
 
-        BottomNavigationView bottomNavigation = findViewById(R.id.bottomNavigation);
-        bottomNavigation.setSelectedItemId(R.id.navigation_expenses);
-        bottomNavigation.setOnItemSelectedListener(item -> {
-            if (item.getItemId() == R.id.navigation_expenses) {
-                // Hiện đang ở Manage Expense , giữ nguyên
+        listViewExpenses.setOnItemClickListener((parent, view, position, id) -> {
+            if (position >= 0 && position < expenses.size()) {
+                Expense expense = expenses.get(position);
+                selectedExpenseId = expense.getId();
+                editAmount.setText(String.valueOf(expense.getAmount()));
+
+                // Find and set the spinner position
+                int categoryPosition = categories.indexOf(expense.getCategory());
+                if (categoryPosition >= 0) {
+                    spinnerCategory.setSelection(categoryPosition);
+                }
+
+                editDate.setText(expense.getDate());
+            }
+        });
+
+        // Setup bottom navigation
+        BottomNavigationView bottomNavigationView = findViewById(R.id.bottomNavigation);
+        bottomNavigationView.setSelectedItemId(R.id.navigation_expenses);
+        bottomNavigationView.setOnItemSelectedListener(item -> {
+            int itemId = item.getItemId();
+            if (itemId == R.id.navigation_home) {
+                startActivity(new Intent(this, HomeScreen.class));
                 return true;
-            } else if (item.getItemId() == R.id.navigation_home) {
-                // Chuyển đến HomeScreen
-                startActivity(new Intent(ManageExpenseActivity.this, HomeScreen.class));
+            } else if (itemId == R.id.navigation_expenses) {
+                // Already on expenses screen
                 return true;
-            } else if (item.getItemId() == R.id.navigation_profile) {
-                // Chuyển sang Activity Profile
-                startActivity(new Intent(ManageExpenseActivity.this, Profile.class));
+            } else if (itemId == R.id.navigation_budget) {
+                startActivity(new Intent(this, ManageBudgetActivity.class));
                 return true;
-            } else if (item.getItemId() == R.id.navigation_ChiPhi) {
-                // Chuyển sang Activity ChiPhi
-                startActivity(new Intent(ManageExpenseActivity.this, RecurringExpenseActivity.class));
+            } else if (itemId == R.id.navigation_profile) {
+                startActivity(new Intent(this, Profile.class));
+                return true;
+            }else if (itemId == R.id.navigation_ChiPhi) {
+                // Chuyển đến Activity RecurringExpenseActivity
+                startActivity(new Intent(this, RecurringExpenseActivity.class));
                 return true;
             }
             return false;
         });
-
     }
 
-    // Hiển thị DatePickerDialog
-    private void showDatePickerDialog() {
-        final Calendar calendar = Calendar.getInstance();
-        int year = calendar.get(Calendar.YEAR);
-        int month = calendar.get(Calendar.MONTH);
-        int day = calendar.get(Calendar.DAY_OF_MONTH);
-
-        DatePickerDialog datePickerDialog = new DatePickerDialog(this,
-                (view, year1, month1, dayOfMonth) -> {
-                    String selectedDate = dayOfMonth + "/" + (month1 + 1) + "/" + year1;
-                    editDate.setText(selectedDate);
-                }, year, month, day);
-
+    private void showDatePicker() {
+        DatePickerDialog datePickerDialog = new DatePickerDialog(
+                this,
+                (view, year, month, dayOfMonth) -> {
+                    calendar.set(Calendar.YEAR, year);
+                    calendar.set(Calendar.MONTH, month);
+                    calendar.set(Calendar.DAY_OF_MONTH, dayOfMonth);
+                    updateDateInView();
+                },
+                calendar.get(Calendar.YEAR),
+                calendar.get(Calendar.MONTH),
+                calendar.get(Calendar.DAY_OF_MONTH)
+        );
         datePickerDialog.show();
     }
 
-    // Hiển thị AlertDialog để xác nhận xoá
-    private void showDeleteConfirmationDialog() {
-        new AlertDialog.Builder(this)
-                .setTitle("Delete Confirmation")
-                .setMessage("Are you sure you want to delete this expense?")
-                .setPositiveButton("Yes", (dialog, which) -> {
-                    // Xoá Expense
-                    dbHelper.deleteExpense(selectedExpenseId);
-                    Toast.makeText(this, "Delete Successful !", Toast.LENGTH_SHORT).show();
-                    loadExpenses();
-                    clearInputFields();
-                })
-                .setNegativeButton("No", (dialog, which) -> dialog.dismiss()) // Không làm gì
-                .show();
+    private void updateDateInView() {
+        String myFormat = "dd/MM/yyyy";
+        SimpleDateFormat sdf = new SimpleDateFormat(myFormat, Locale.getDefault());
+        editDate.setText(sdf.format(calendar.getTime()));
     }
 
-    // Load dữ liệu từ database vào ListView
     private void loadExpenses() {
-        List<String[]> rawExpenses = dbHelper.getExpenses();
-        expenses = new ArrayList<>();
-        for (String[] e : rawExpenses) {
-            expenses.add(new Expense(
-                    Integer.parseInt(e[0]), // Expense ID
-                    Double.parseDouble(e[1]), // Amount
-                    e[2], // Category
-                    e[3]  // Date
-            ));
-        }
+        expenses = dbHelper.getExpensesForUser(currentUserId);
         adapter = new ExpenseAdapter(this, expenses);
         listViewExpenses.setAdapter(adapter);
     }
 
-    // Xoá dữ liệu trong các trường nhập liệu
+    private boolean validateInput() {
+        if (TextUtils.isEmpty(editAmount.getText().toString())) {
+            Toast.makeText(this, "Please enter amount", Toast.LENGTH_SHORT).show();
+            return false;
+        }
+        String selectedCategory = spinnerCategory.getSelectedItem().toString();
+        if ("Choose Category".equals(selectedCategory) || "No budgets available".equals(selectedCategory)) {
+            Toast.makeText(this, "Please select a valid category", Toast.LENGTH_SHORT).show();
+            return false;
+        }
+        if (TextUtils.isEmpty(editDate.getText().toString())) {
+            Toast.makeText(this, "Please select date", Toast.LENGTH_SHORT).show();
+            return false;
+        }
+        return true;
+    }
+
     private void clearInputFields() {
         editAmount.setText("");
-        editCategory.setText("");
         editDate.setText("");
         selectedExpenseId = -1;
+        spinnerCategory.setSelection(0);
+    }
+
+    @Override
+    protected void onResume() {
+        super.onResume();
+        loadCategories();
+        loadExpenses();
     }
 }
+

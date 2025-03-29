@@ -8,11 +8,16 @@
         android:icon="@drawable/ic_expense"
         android:title="Expenses" />
     <item
+        android:id="@+id/navigation_budget"
+        android:icon="@drawable/ic_budget"
+        android:title="Budget"/>
+    <item
         android:id="@+id/navigation_ChiPhi"
         android:icon="@drawable/ic_chiphi1"
-        android:title="Recurring Expense" />
+        android:title="Recurring" />
     <item
         android:id="@+id/navigation_profile"
         android:icon="@drawable/ic_profile"
         android:title="Profile" />
+
 </menu>

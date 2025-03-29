@@ -19,8 +19,7 @@
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        android:layout_marginTop="32dp"
-        />
+        android:layout_marginTop="32dp" />
 
     <!-- Logo/Image -->
     <ImageView
@@ -34,27 +33,34 @@
         app:layout_constraintEnd_toEndOf="parent"
         android:layout_marginTop="16dp" />
 
-    <TextView
-        android:id="@+id/tvExpiringExpenses"
-        android:layout_width="340dp"
-        android:layout_height="53dp"
-        android:layout_marginTop="24dp"
-        android:text="No Expiring Expenses"
-        android:textColor="#FF0000"
-        android:textSize="16sp"
-        android:visibility="gone"
+
+    <com.google.android.material.card.MaterialCardView
+        android:id="@+id/cardExpiringExpenses"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_margin="10dp"
+        android:layout_marginStart="10dp"
+        android:layout_marginEnd="9dp"
+        android:layout_marginBottom="32dp"
+        android:backgroundTint="@color/white"
+        app:cardCornerRadius="12dp"
+        app:cardElevation="6dp"
+        app:layout_constraintBottom_toTopOf="@+id/txtWelcome"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.536"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/imageView" />
+        app:layout_constraintStart_toStartOf="parent">
+
+    </com.google.android.material.card.MaterialCardView>
     <!-- Manage Expenses Button -->
 
+    <!-- Logout Button -->
+
     <com.google.android.material.button.MaterialButton
-        android:id="@+id/btnManageExpenses"
+        android:id="@+id/btnManageExpense"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_marginHorizontal="32dp"
-        android:layout_marginTop="96dp"
+        android:layout_marginTop="100dp"
+        android:backgroundTint="#1A237E"
         android:text="Manage Expenses"
         android:textColor="@android:color/white"
         android:textSize="16sp"
@@ -64,6 +70,23 @@
         app:layout_constraintHorizontal_bias="0.484"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@id/imageView" />
+
+    <com.google.android.material.button.MaterialButton
+        android:id="@+id/btnLogout"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginHorizontal="32dp"
+        android:layout_marginTop="20dp"
+        android:backgroundTint="#E0115F"
+        android:text="Logout"
+        android:textColor="@android:color/white"
+        android:textSize="16sp"
+        app:cornerRadius="12dp"
+        app:icon="@drawable/ic_logout"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.562"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/btnManageExpense" />
 
     <com.google.android.material.bottomnavigation.BottomNavigationView
         android:id="@+id/bottomNavigation"
@@ -76,6 +99,38 @@
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent" />
+
+
+    <LinearLayout
+        android:id="@+id/layoutExpiringExpenses"
+        android:background="@drawable/bgr_bg"
+        android:layout_width="347dp"
+        android:layout_height="65dp"
+        android:layout_marginStart="32dp"
+        android:layout_marginEnd="32dp"
+        android:layout_marginBottom="20dp"
+        android:gravity="center_vertical"
+        android:orientation="horizontal"
+        android:padding="10dp"
+        app:layout_constraintBottom_toTopOf="@+id/btnManageExpense"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent">
+
+        <ImageView
+            android:layout_width="24dp"
+            android:layout_height="24dp"
+            android:layout_marginEnd="6dp"
+            android:src="@drawable/ic_notification" />
+
+        <TextView
+            android:id="@+id/tvExpiringExpenses"
+            android:layout_width="269dp"
+            android:layout_height="39dp"
+            android:text="No upcoming expenses"
+            android:textColor="@color/black"
+            android:textSize="10sp"
+            android:textStyle="bold" />
+    </LinearLayout>
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>

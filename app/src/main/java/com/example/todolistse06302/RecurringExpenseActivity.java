@@ -2,6 +2,7 @@ package com.example.todolistse06302;
 
 import android.app.DatePickerDialog;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
@@ -15,9 +16,11 @@ import androidx.appcompat.app.AppCompatActivity;
 import com.example.todolistse06302.database.DatabaseHelper;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 import java.text.DecimalFormat;
+import java.text.NumberFormat;
 import java.util.Calendar;
 import java.util.List;
 import java.util.ArrayList;
+import android.util.Log;
 
 
 
@@ -29,14 +32,21 @@ public class RecurringExpenseActivity extends AppCompatActivity {
     private RecurringExpenseAdapter adapter;
     private List<RecurringExpense> recurringExpenses;
     private int selectedExpenseId = -1;
+    private int currentUserId;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_recurring_costs);
 
-        dbHelper = new DatabaseHelper(this);
+        SharedPreferences sharedPreferences = getSharedPreferences("MyPrefs", MODE_PRIVATE);
+        currentUserId = sharedPreferences.getInt("userId", -1); // Sử dụng đúng key mà bạn đã lưu trước đó
+        if (currentUserId == -1) {
+            Toast.makeText(this, "User ID not found. Please log in again.", Toast.LENGTH_SHORT).show();
+            finish();
+        }
 
+        dbHelper = new DatabaseHelper(this);
         edtCostName = findViewById(R.id.edtCostName);
         edtCostAmount = findViewById(R.id.edtCostAmount);
         edtStartDate = findViewById(R.id.edtStartDate);
@@ -55,39 +65,33 @@ public class RecurringExpenseActivity extends AppCompatActivity {
 
         // Nút Edit Cost
         btnEditCost.setOnClickListener(v -> {
-            if (selectedExpenseId == -1) { // Kiểm tra xem đã chọn mục nào chưa
+            if (selectedExpenseId == -1) {
                 Toast.makeText(this, "Please select an expense to edit!", Toast.LENGTH_SHORT).show();
                 return;
             }
-
             String costName = edtCostName.getText().toString().trim();
             String amountStr = edtCostAmount.getText().toString().trim();
             String startDate = edtStartDate.getText().toString().trim();
             String endDate = edtEndDate.getText().toString().trim();
 
-            // Kiểm tra nếu các trường bị bỏ trống
             if (costName.isEmpty() || amountStr.isEmpty() || startDate.isEmpty() || endDate.isEmpty()) {
                 Toast.makeText(this, "Please fill all fields!", Toast.LENGTH_SHORT).show();
                 return;
             }
-
             try {
                 double amount = Double.parseDouble(amountStr);
 
-                // Cập nhật dữ liệu trong database
-                dbHelper.editcost(selectedExpenseId, costName, amount, startDate, endDate);
-
-                // Cập nhật danh sách và giao diện
+                dbHelper.editcost(selectedExpenseId, costName, amount, startDate, endDate, currentUserId);
                 updateRecurringExpenseList();
-                adapter.notifyDataSetChanged();
-
+                if (adapter != null) {
+                    adapter.notifyDataSetChanged();
+                }
                 Toast.makeText(this, "Update Successful!", Toast.LENGTH_SHORT).show();
                 clearInputFields();
             } catch (NumberFormatException e) {
                 Toast.makeText(this, "Invalid amount entered!", Toast.LENGTH_SHORT).show();
             }
         });
-
         // Nút Delete Cost
         btnDeleteCost.setOnClickListener(v -> {
             if (selectedExpenseId != -1) {
@@ -96,7 +100,6 @@ public class RecurringExpenseActivity extends AppCompatActivity {
                 Toast.makeText(this, "Please select an expense to delete!", Toast.LENGTH_SHORT).show();
             }
         });
-
         // Xử lý sự kiện khi chọn Recurring Expense từ ListView
         listViewRecurringCosts.setOnItemClickListener((parent, view, position, id) -> {
             RecurringExpense expense = recurringExpenses.get(position);
@@ -106,7 +109,6 @@ public class RecurringExpenseActivity extends AppCompatActivity {
             DecimalFormat df = new DecimalFormat("#");
             String formattedAmount = df.format(expense.getAmount());
             edtCostAmount.setText(formattedAmount);
-            // Hiển thị log kiểm tra
             Toast.makeText(this, "Amount: " + formattedAmount, Toast.LENGTH_SHORT).show();
 
             edtStartDate.setText(expense.getStartDate());
@@ -131,6 +133,10 @@ public class RecurringExpenseActivity extends AppCompatActivity {
                 // Chuyển sang Activity Profile
                 startActivity(new Intent(RecurringExpenseActivity.this, Profile.class));
                 return true;
+            }else if (item.getItemId() == R.id.navigation_budget) {
+                // Chuyển sang Activity ManageBudgetActivity
+                startActivity(new Intent(RecurringExpenseActivity.this, ManageBudgetActivity.class));
+                return true;
             }
             return false;
         });
@@ -151,12 +157,16 @@ public class RecurringExpenseActivity extends AppCompatActivity {
         datePickerDialog.show();
     }
     private void updateRecurringExpenseList() {
-        recurringExpenses.clear(); // Xóa danh sách cũ
-        recurringExpenses.addAll(dbHelper.getRecurringExpenses()); // Lấy danh sách mới từ DB
-        adapter.notifyDataSetChanged(); // Cập nhật giao diện
+        recurringExpenses.clear();
+        recurringExpenses.addAll(dbHelper.getRecurringExpenses(currentUserId));
+        adapter.notifyDataSetChanged();
+    }
+    private int getCurrentUserId() {
+        SharedPreferences prefs = getSharedPreferences("UserPrefs", MODE_PRIVATE);
+        return prefs.getInt("userId", -1);  // Trả về -1 nếu không tìm thấy user_id
     }
 
-    private void addRecurringCost() {
+    public void addRecurringCost() {
         String name = edtCostName.getText().toString().trim();
         String amountStr = edtCostAmount.getText().toString().trim();
         String startDate = edtStartDate.getText().toString().trim();
@@ -166,50 +176,40 @@ public class RecurringExpenseActivity extends AppCompatActivity {
             Toast.makeText(this, "Please fill all fields!", Toast.LENGTH_SHORT).show();
             return;
         }
-
         try {
             double amount = Double.parseDouble(amountStr);
-
-            // Chỉ thêm dữ liệu vào database, không ảnh hưởng UI
-            dbHelper.addRecurringExpense(name, amount, startDate, endDate);
-
-            // Cập nhật danh sách mà không làm thay đổi giao diện
-            updateRecurringExpenseList();
-
+            Log.d("DEBUG", "Adding expense - Name: " + name + ", Amount: " + amount + ", Start: " + startDate + ", End: " + endDate + ", User ID: " + currentUserId);
+            dbHelper.addRecurringExpense(name, amount, startDate, endDate, currentUserId);
+            loadRecurringExpenses();
             Toast.makeText(this, "Recurring cost added!", Toast.LENGTH_SHORT).show();
-
-            // Xóa nội dung trong ô nhập liệu sau khi thêm
-            edtCostName.setText("");
-            edtCostAmount.setText("");
-            edtStartDate.setText("");
-            edtEndDate.setText("");
+            clearInputFields();
         } catch (NumberFormatException e) {
+            Log.e("ERROR", "Invalid amount entered: " + amountStr);
             Toast.makeText(this, "Invalid amount entered!", Toast.LENGTH_SHORT).show();
-            }
+        }
     }
-
     private void showDeleteConfirmationDialog() {
         new AlertDialog.Builder(this)
                 .setTitle("Delete Confirmation")
                 .setMessage("Are you sure you want to delete this expense?")
                 .setPositiveButton("Yes", (dialog, which) -> {
-                    dbHelper.deleteCost(selectedExpenseId); // 🛑 Xóa dữ liệu khỏi database
-                    updateRecurringExpenseList(); // 🔄 Cập nhật ListView
-                    adapter.notifyDataSetChanged(); // 🔄 Làm mới giao diện
+                    dbHelper.deleteCost(selectedExpenseId, currentUserId); // Thêm userId vào
+                    updateRecurringExpenseList();
+                    adapter.notifyDataSetChanged();
                     Toast.makeText(this, "Delete Successful!", Toast.LENGTH_SHORT).show();
-                    clearInputFields(); // Xóa nội dung ô nhập liệu
+                    clearInputFields();
                 })
                 .setNegativeButton("No", (dialog, which) -> dialog.dismiss())
                 .show();
     }
-
     private void loadRecurringExpenses() {
+        Log.d("DEBUG", "Loading expenses for user ID: " + currentUserId);
         if (recurringExpenses == null) {
             recurringExpenses = new ArrayList<>();
         }
-        recurringExpenses.clear();  // ✅ Xóa dữ liệu cũ trước khi load mới
-        recurringExpenses.addAll(dbHelper.getRecurringExpenses());
-
+        recurringExpenses.clear();
+        recurringExpenses.addAll(dbHelper.getRecurringExpenses(currentUserId));
+        Log.d("DEBUG", "Number of expenses loaded: " + recurringExpenses.size());
         if (adapter == null) {
             adapter = new RecurringExpenseAdapter(this, recurringExpenses);
             listViewRecurringCosts.setAdapter(adapter);
