@@ -1,0 +1,110 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:orientation="vertical"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <ImageView
+        android:id="@+id/imageView5"
+        android:layout_width="150dp"
+        android:layout_height="150dp"
+        android:src="@drawable/cemnoback"
+        android:layout_gravity="center"
+        tools:ignore="ContentDescription" />
+
+    <TextView
+        android:id="@+id/txtWelcome"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:fontFamily="monospace"
+        android:text="Campus Expense Management"
+        android:textColor="@android:color/black"
+        android:textSize="22sp"
+        android:textStyle="bold" />
+
+    <ImageView
+        android:id="@+id/imageView6"
+        android:layout_width="167dp"
+        android:layout_height="153dp"
+        android:layout_gravity="center"
+        android:src="@drawable/ic_user"
+        tools:ignore="ContentDescription" />
+
+    <TextView
+        android:id="@+id/txtProfile"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:fontFamily="monospace"
+        android:text="Profile"
+        android:textColor="@android:color/black"
+        android:textSize="22sp"
+        android:textStyle="bold" />
+
+    <TextView
+        android:id="@+id/txtUserEmail"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:textSize="20sp"
+        android:textAlignment="center"
+        android:layout_marginBottom="24dp"
+        android:textColor="#333333"
+        android:textStyle="bold"/>
+
+    <com.google.android.material.button.MaterialButton
+        android:id="@+id/btnManageExpense"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Manage Expenses"
+        android:textSize="16sp"
+        android:textColor="@android:color/white"
+        android:backgroundTint="#58D68D"
+        app:cornerRadius="12dp"
+        app:icon="@drawable/ic_expense"
+        android:layout_marginTop="16dp"
+        android:layout_marginHorizontal="32dp" />
+
+    <com.google.android.material.button.MaterialButton
+        android:id="@+id/btnManageBudget"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Manage Budget"
+        android:textSize="16sp"
+        android:textColor="@android:color/white"
+        android:backgroundTint="#5DADE2"
+        app:cornerRadius="12dp"
+        app:icon="@drawable/ic_budget"
+        android:layout_marginTop="16dp"
+        android:layout_marginHorizontal="32dp" />
+
+    <com.google.android.material.button.MaterialButton
+        android:id="@+id/btnLogout"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Logout"
+        android:textSize="16sp"
+        android:textColor="@android:color/white"
+        app:backgroundTint="@android:color/holo_red_dark"
+        app:cornerRadius="12dp"
+        app:icon="@drawable/ic_logout"
+        android:layout_marginTop="12dp"
+        android:layout_marginHorizontal="32dp" />
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="1" />
+
+    <com.google.android.material.bottomnavigation.BottomNavigationView
+        android:id="@+id/bottomNavigation"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_gravity="bottom"
+        app:menu="@menu/menu_main"
+        app:itemIconTint="@color/selector_bottom_nav"
+        app:itemTextColor="@color/selector_bottom_nav"
+        app:labelVisibilityMode="labeled" />
+</LinearLayout>
