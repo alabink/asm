@@ -1,0 +1,100 @@
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/main"
+    android:gravity="center"
+    android:orientation="vertical"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".AdminPanelProfile">
+
+    <!-- Welcome Text -->
+
+    <TextView
+        android:id="@+id/txtWelcome"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Campus Expense Management"
+        android:textSize="22sp"
+        android:textStyle="bold"
+        android:textColor="@android:color/black"
+        android:layout_marginTop="32dp" />
+
+    <!-- Logo/Image -->
+    <!-- Welcome Text -->
+    <ImageView
+        android:id="@+id/imageView7"
+        android:layout_width="150dp"
+        android:layout_height="150dp"
+        android:layout_marginTop="20dp"
+        app:srcCompat="@drawable/user" />
+
+    <TextView
+        android:id="@+id/welcomeUser"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text=""
+        android:textSize="22sp"
+        android:textStyle="bold"
+        android:textColor="@android:color/black"
+        android:layout_marginTop="32dp" />
+
+    <!-- Manage User Button -->
+    <com.google.android.material.button.MaterialButton
+        android:id="@+id/btnManageUsers"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Manage Users"
+        android:textSize="16sp"
+        android:textColor="@android:color/white"
+        android:backgroundTint="#5DADE2"
+        app:cornerRadius="12dp"
+        app:icon="@drawable/user"
+        android:layout_marginTop="16dp"
+        android:layout_marginHorizontal="32dp" />
+
+    <!-- View User Expenses Button -->
+    <com.google.android.material.button.MaterialButton
+        android:id="@+id/btnViewUserExpenses"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="View User Expenses"
+        android:textSize="16sp"
+        android:textColor="@android:color/white"
+        android:backgroundTint="#58D68D"
+        app:cornerRadius="12dp"
+        app:icon="@drawable/ic_money"
+        android:layout_marginTop="16dp"
+        android:layout_marginHorizontal="32dp" />
+    <!-- Logout Button -->
+    <com.google.android.material.button.MaterialButton
+        android:id="@+id/btnLogout"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Logout"
+        android:textSize="16sp"
+        android:textColor="@android:color/white"
+        android:backgroundTint="#EC7063"
+        app:cornerRadius="12dp"
+        app:icon="@drawable/ic_logout"
+        android:layout_marginTop="16dp"
+        android:layout_marginHorizontal="32dp" />
+
+    <!-- Bottom Navigation View -->
+    <FrameLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_weight="1">
+
+        <com.google.android.material.bottomnavigation.BottomNavigationView
+            android:id="@+id/bottomNavigation"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            app:itemIconTint="@color/selector_bottom_nav"
+            app:itemTextColor="@color/selector_bottom_nav"
+            app:labelVisibilityMode="labeled"
+            app:menu="@menu/adminmenu"
+            android:layout_gravity="bottom" />
+    </FrameLayout>
+
+</LinearLayout>

@@ -1,0 +1,19 @@
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+    <item
+        android:id="@+id/navigation_home"
+        android:icon="@drawable/ic_home"
+        android:title="Home" />
+    <item
+        android:id="@+id/navigation_manage_users"
+        android:icon="@drawable/user"
+        android:title="Manage User" />
+    <item
+        android:id="@+id/navigation_view_users_expenses"
+        android:icon="@drawable/ic_expense"
+        android:title="View User Expenses"/>
+    <item
+        android:id="@+id/navigation_profile"
+        android:icon="@drawable/ic_profile"
+        android:title="Profile" />
+
+</menu>
