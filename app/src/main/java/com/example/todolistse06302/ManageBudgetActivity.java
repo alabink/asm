@@ -146,6 +146,9 @@ public class ManageBudgetActivity extends AppCompatActivity {
             } else if (itemId == R.id.navigation_budget) {
                 // Already on budget screen
                 return true;
+            }else if (itemId == R.id.navigation_ChiPhi) {
+                startActivity(new Intent(this, RecurringExpenseActivity.class));
+                return true;
             }
             return false;
         });
