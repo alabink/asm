@@ -29,7 +29,7 @@ import java.util.List;
 import java.util.Map;
 
 public class Report extends AppCompatActivity {
-    private TextView tvTotalExpense;
+    private TextView tvTotalExpense, tvReportTitle;
     private ListView lvExpensesReport;
     private Spinner spinnerTimePeriod;
     private BarChart barChart;
@@ -41,29 +41,39 @@ public class Report extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.report);
 
-        // Mapping UI Elements
+        // Ánh xạ UI Elements
         spinnerTimePeriod = findViewById(R.id.spinnerTimePeriod122);
         tvTotalExpense = findViewById(R.id.tvTotalExpense);
+        tvReportTitle = findViewById(R.id.tvReportTitle);
         lvExpensesReport = findViewById(R.id.lvExpensesReport);
         barChart = findViewById(R.id.barChart);
-        dbHelper = new DatabaseHelper(this);
 
-        // Setup Bottom Navigation
+        dbHelper = new DatabaseHelper(this);
+        sharedPreferences = getSharedPreferences("MyPrefs", MODE_PRIVATE);
+
+        setupBottomNavigation();
+        setupSpinner();
+    }
+
+    private void setupBottomNavigation() {
         BottomNavigationView bottomNavigationView = findViewById(R.id.bottomNavigation);
         bottomNavigationView.setOnItemSelectedListener(item -> {
+            Intent intent = null;
             if (item.getItemId() == R.id.navigation_home) {
-                startActivity(new Intent(Report.this, HomeScreen.class));
+                intent = new Intent(Report.this, HomeScreen.class);
             } else if (item.getItemId() == R.id.navigation_expenses) {
-                startActivity(new Intent(Report.this, ManageExpenseActivity.class));
+                intent = new Intent(Report.this, ManageExpenseActivity.class);
             } else if (item.getItemId() == R.id.navigation_profile) {
-                startActivity(new Intent(Report.this, Profile.class));
+                intent = new Intent(Report.this, Profile.class);
             } else if (item.getItemId() == R.id.navigation_budget) {
-                startActivity(new Intent(Report.this, ManageBudgetActivity.class));
+                intent = new Intent(Report.this, ManageBudgetActivity.class);
             }
+            if (intent != null) startActivity(intent);
             return true;
         });
+    }
 
-        // Setup Spinner
+    private void setupSpinner() {
         List<String> timePeriods = new ArrayList<>();
         timePeriods.add("Monthly");
         timePeriods.add("Yearly");
@@ -72,38 +82,31 @@ public class Report extends AppCompatActivity {
         adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
         spinnerTimePeriod.setAdapter(adapter);
 
-        // Spinner Selection
         spinnerTimePeriod.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override
             public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
-                loadSummary(timePeriods.get(position));
+                String selectedOption = timePeriods.get(position);
+                tvReportTitle.setText("Expense Report by " + selectedOption); // ✅ Cập nhật tiêu đề
+                loadSummary(selectedOption);
             }
 
             @Override
             public void onNothingSelected(AdapterView<?> parent) {}
         });
-
-        loadSummary("Monthly"); // Default to Monthly View
     }
 
     private int getUserId() {
-        sharedPreferences = getSharedPreferences("MyPrefs", MODE_PRIVATE);
-        int userId = sharedPreferences.getInt("userId", -1);
-        return userId;
-
+        return sharedPreferences.getInt("userId", -1);
     }
-
 
     private void loadSummary(String timePeriod) {
         int userId = getUserId();
         Cursor cursor = dbHelper.getExpenses(userId);
-        List<String[]> expenses = new ArrayList<>();
         Map<String, Double> summaryData = new HashMap<>();
         double totalExpense = 0;
 
         if (cursor != null && cursor.moveToFirst()) {
             int colAmount = cursor.getColumnIndex("amount");
-            int colCategory = cursor.getColumnIndex("category");
             int colDate = cursor.getColumnIndex("date");
 
             do {
@@ -114,7 +117,6 @@ public class Report extends AppCompatActivity {
                 totalExpense += amount;
                 summaryData.put(key, summaryData.getOrDefault(key, 0.0) + amount);
             } while (cursor.moveToNext());
-
             cursor.close();
         }
 

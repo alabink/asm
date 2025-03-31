@@ -5,6 +5,7 @@
     android:layout_height="match_parent"
     android:orientation="vertical"
     android:background="@android:color/white">
+
     <ScrollView
 
         android:layout_width="match_parent"
@@ -36,7 +37,7 @@
             <ImageView
                 android:id="@+id/imageView"
                 android:layout_width="200dp"
-                android:layout_height="100dp"
+                android:layout_height="200dp"
                 android:layout_gravity="center"
                 android:layout_marginTop="16dp"
                 android:scaleType="centerCrop"
@@ -89,12 +90,12 @@
             <TextView
                 android:id="@+id/tvReportTitle"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
+                android:layout_height="101dp"
+                android:layout_marginTop="16dp"
+                android:paddingBottom="28dp"
                 android:text="Expense Report by Month"
                 android:textSize="16sp"
-                android:textStyle="bold"
-                android:paddingBottom="28dp"
-                android:layout_marginTop="16dp"/>
+                android:textStyle="bold" />
 
             <!-- Expense Bar Chart -->
 
@@ -110,7 +111,7 @@
             <ListView
                 android:id="@+id/lvExpensesReport"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
+                android:layout_height="300dp"
                 android:divider="@android:color/darker_gray"
                 android:dividerHeight="1dp"
                 android:background="@android:color/white"
@@ -129,6 +130,7 @@
                 android:elevation="4dp"/>
         </LinearLayout>
     </ScrollView>
+
     <com.google.android.material.bottomnavigation.BottomNavigationView
         android:id="@+id/bottomNavigation"
         android:layout_width="match_parent"

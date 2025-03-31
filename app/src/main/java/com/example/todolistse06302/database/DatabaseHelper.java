@@ -357,6 +357,7 @@ public class DatabaseHelper extends SQLiteOpenHelper {
         }
     }
 
+
 //     Modified getExpenses to filter by userId
 //    public Cursor getExpenses(int userId) {
 //        SQLiteDatabase db = this.getReadableDatabase();
@@ -374,6 +375,7 @@ public Cursor getExpenses(int userId) {
             new String[]{String.valueOf(userId)},
             null, null, COLUMN_DATE + " DESC");
 }
+
 
     // Modified addExpense to include userId
     public void addExpense(double amount, String category, String date, int userId) throws Exception {
@@ -748,6 +750,7 @@ public Cursor getExpenses(int userId) {
 
 
 
+
 //    public List<String[]> getExpenses(int userId) {
 //        List<String[]> expensesList = new ArrayList<>();
 //        SQLiteDatabase db = this.getReadableDatabase();
@@ -769,6 +772,7 @@ public Cursor getExpenses(int userId) {
 //        db.close();
 //        return expensesList;
 //    }
+
 
 
 
