@@ -850,6 +850,56 @@ public class DatabaseHelper extends SQLiteOpenHelper {
         cursor.close();
         return total;
     }
+    public List<String> getExpenseSummaryForUserByCategory(int userId, String category) {
+        List<String> summaryList = new ArrayList<>();
+        SQLiteDatabase db = this.getReadableDatabase();
+
+        Cursor cursor = db.rawQuery(
+                "SELECT e.category, SUM(e.amount) AS totalSpent, " +
+                        "(b.total_budget - SUM(e.amount)) AS remainingBudget " +
+                        "FROM expenses e " +
+                        "JOIN budgets b ON e.category = b.category AND e.user_id = b.user_id " +
+                        "WHERE e.user_id = ? AND e.category = ? " +
+                        "GROUP BY e.category, b.total_budget",
+                new String[]{String.valueOf(userId), category}
+        );
+
+        if (cursor.moveToFirst()) {
+            do {
+                double totalSpent = cursor.getDouble(1);
+                double remainingBudget = cursor.getDouble(2);
+                summaryList.add(category + ": Spent $" + totalSpent + " | Budget Left: $" + remainingBudget);
+            } while (cursor.moveToNext());
+        }
+
+        cursor.close();
+        return summaryList;
+    }
+    public List<String> getExpenseCategoriesForUser(int userId) {
+        List<String> categories = new ArrayList<>();
+
+        // Truy vấn các danh mục chi tiêu mà người dùng đã chi tiền cho
+        SQLiteDatabase db = this.getReadableDatabase();
+        Cursor cursor = db.rawQuery(
+                "SELECT DISTINCT category FROM expenses WHERE user_id = ?",
+                new String[]{String.valueOf(userId)}
+        );
+
+        if (cursor != null && cursor.moveToFirst()) {
+            do {
+                String category = cursor.getString(0); // Lấy danh mục chi tiêu
+                categories.add(category);
+            } while (cursor.moveToNext());
+
+            cursor.close();
+        }
+
+        return categories;
+    }
+
+
+
+
 
 
 
