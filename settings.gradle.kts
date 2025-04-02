@@ -17,6 +17,14 @@ dependencyResolutionManagement {
         google()
         mavenCentral()
     }
+
+
+    repositories {
+        google()
+        mavenCentral()
+        maven("https://jitpack.io")
+    }
+
 }
 
 rootProject.name = "assignmentad"

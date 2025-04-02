@@ -357,15 +357,27 @@ public class DatabaseHelper extends SQLiteOpenHelper {
         }
     }
 
-    // Modified getExpenses to filter by userId
-    public Cursor getExpenses(int userId) {
-        SQLiteDatabase db = this.getReadableDatabase();
-        return db.query(TABLE_EXPENSES,
-                null,
-                COLUMN_EXPENSE_USER_ID + " = ?",
-                new String[]{String.valueOf(userId)},
-                null, null, COLUMN_DATE + " DESC");
-    }
+
+
+//     Modified getExpenses to filter by userId
+//    public Cursor getExpenses(int userId) {
+//        SQLiteDatabase db = this.getReadableDatabase();
+//        return db.query(TABLE_EXPENSES,
+//                null,
+//                COLUMN_EXPENSE_USER_ID + " = ?",
+//                new String[]{String.valueOf(userId)},
+//                null, null, COLUMN_DATE + " DESC");
+//    }
+public Cursor getExpenses(int userId) {
+    SQLiteDatabase db = this.getReadableDatabase();
+    return db.query(TABLE_EXPENSES,
+            null,
+            COLUMN_EXPENSE_USER_ID + " = ?",
+            new String[]{String.valueOf(userId)},
+            null, null, COLUMN_DATE + " DESC");
+}
+
+
 
     // Modified addExpense to include userId
     public void addExpense(double amount, String category, String date, int userId) throws Exception {
@@ -736,4 +748,40 @@ public class DatabaseHelper extends SQLiteOpenHelper {
         }
         return categories;
     }
+
+
+
+
+
+
+//    public List<String[]> getExpenses(int userId) {
+//        List<String[]> expensesList = new ArrayList<>();
+//        SQLiteDatabase db = this.getReadableDatabase();
+//
+//        Cursor cursor = db.rawQuery("SELECT amount, date FROM expenses WHERE user_id = ?",
+//                new String[]{String.valueOf(userId)});
+//
+//        Log.d("DEBUG", "Querying expenses for userID: " + userId);
+//
+//        if (cursor != null) {
+//            while (cursor.moveToNext()) {
+//                String amount = cursor.getString(0);
+//                String date = cursor.getString(1);
+//                expensesList.add(new String[]{amount, date});
+//                Log.d("DEBUG", "Fetched expense: " + amount + " - " + date);
+//            }
+//            cursor.close();
+//        }
+//        db.close();
+//        return expensesList;
+//    }
+
+
+
+
+
+
+
+
+
 }

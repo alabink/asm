@@ -17,7 +17,10 @@ import com.google.android.material.button.MaterialButton;
 import com.google.firebase.auth.FirebaseAuth;
 
 public class HomeScreen extends AppCompatActivity {
-    private MaterialButton btnManageExpense, btnLogout;
+
+
+    private MaterialButton btnManageExpense, btnLogout, btnReport;
+
     private FirebaseAuth mAuth;
     private SharedPreferences sharedPreferences;
 
@@ -32,6 +35,14 @@ public class HomeScreen extends AppCompatActivity {
 
         btnManageExpense = findViewById(R.id.btnManageExpense);
         btnLogout = findViewById(R.id.btnLogout);
+
+        btnReport = findViewById(R.id.btnreport);
+
+        btnReport.setOnClickListener(view -> {
+            Intent intent = new Intent(HomeScreen.this, Report.class);
+            startActivity(intent);
+        });
+
 
         btnManageExpense.setOnClickListener(view -> {
             Intent intent = new Intent(HomeScreen.this, ManageExpenseActivity.class);
