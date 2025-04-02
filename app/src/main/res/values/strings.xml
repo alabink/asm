@@ -4,4 +4,8 @@
     <string name="expenses">Expenses</string>
     <string name="profile">Profile</string>
     <string name="category_prompt">Select Category</string>
+    <string-array name="time_period_options">
+        <item>Hàng tháng</item>
+        <item>Hàng năm</item>
+    </string-array>
 </resources>

@@ -34,39 +34,53 @@
         android:layout_marginTop="16dp" />
 
     <!-- Manage Expenses Button -->
-
-    <!-- Logout Button -->
-
     <com.google.android.material.button.MaterialButton
         android:id="@+id/btnManageExpense"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:layout_marginHorizontal="32dp"
-        android:layout_marginTop="20dp"
-        android:backgroundTint="#1A237E"
         android:text="Manage Expenses"
-        android:textColor="@android:color/white"
         android:textSize="16sp"
+        android:textColor="@android:color/white"
+        android:backgroundTint="#1A237E"
         app:cornerRadius="12dp"
         app:icon="@drawable/ic_manage"
-        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/imageView"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/imageView" />
+        app:layout_constraintEnd_toEndOf="parent"
+        android:layout_marginTop="16dp"
+        android:layout_marginHorizontal="32dp" />
+
+    <!-- Logout Button -->
 
     <com.google.android.material.button.MaterialButton
         android:id="@+id/btncost"
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
+        android:layout_width="343dp"
+        android:layout_height="46dp"
         android:layout_marginHorizontal="32dp"
-        android:layout_marginTop="84dp"
+        android:layout_marginStart="32dp"
+        android:layout_marginTop="24dp"
         android:backgroundTint="#1A237E"
         android:text="Cost Overview"
         android:textColor="@android:color/white"
         android:textSize="16sp"
         app:cornerRadius="12dp"
         app:icon="@drawable/ic_manage"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/btnreport" />
+
+    <com.google.android.material.button.MaterialButton
+        android:id="@+id/btnreport"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginHorizontal="32dp"
+        android:layout_marginTop="80dp"
+        android:backgroundTint="#1A237E"
+        android:text="Expense report"
+        android:textColor="@android:color/white"
+        android:textSize="16sp"
+        app:cornerRadius="12dp"
+        app:icon="@drawable/ic_money"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.25"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@id/imageView" />
 
@@ -75,7 +89,7 @@
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_marginHorizontal="32dp"
-        android:layout_marginTop="76dp"
+        android:layout_marginTop="252dp"
         android:backgroundTint="#E0115F"
         android:text="Logout"
         android:textColor="@android:color/white"

@@ -20,7 +20,6 @@ import java.util.Calendar;
 import java.util.List;
 import java.util.Locale;
 
-
 public class ManageExpenseActivity extends AppCompatActivity {
     private EditText editAmount, editDate;
     private Spinner spinnerCategory;
@@ -34,6 +33,7 @@ public class ManageExpenseActivity extends AppCompatActivity {
     private Calendar calendar;
     private List<String> categories;
     private ArrayAdapter<String> categoryAdapter;
+    private String currentUserEmail;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -83,7 +83,6 @@ public class ManageExpenseActivity extends AppCompatActivity {
         }
         categoryAdapter.notifyDataSetChanged();
     }
-
     private void setupListeners() {
         editDate.setOnClickListener(v -> showDatePicker());
 

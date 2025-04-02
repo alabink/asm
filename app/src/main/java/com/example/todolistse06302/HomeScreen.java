@@ -17,7 +17,9 @@ import com.google.android.material.button.MaterialButton;
 import com.google.firebase.auth.FirebaseAuth;
 
 public class HomeScreen extends AppCompatActivity {
-    private MaterialButton btnManageExpense, btnLogout, btncost;
+
+    private MaterialButton btnManageExpense, btnLogout, btnReport,btncost;
+
     private FirebaseAuth mAuth;
     private SharedPreferences sharedPreferences;
 
@@ -33,12 +35,18 @@ public class HomeScreen extends AppCompatActivity {
         btnManageExpense = findViewById(R.id.btnManageExpense);
         btnLogout = findViewById(R.id.btnLogout);
         btncost = findViewById(R.id.btncost);
+        btnReport = findViewById(R.id.btnreport);
+
+        btnReport.setOnClickListener(view -> {
+            Intent intent = new Intent(HomeScreen.this, Report.class);
+            startActivity(intent);
+        });
+
 
         btnManageExpense.setOnClickListener(view -> {
             Intent intent = new Intent(HomeScreen.this, ManageExpenseActivity.class);
             startActivity(intent);
         });
-
         btncost.setOnClickListener(view -> {
             Intent intent = new Intent(HomeScreen.this, CostOverview.class);
             startActivity(intent);
@@ -46,19 +54,23 @@ public class HomeScreen extends AppCompatActivity {
 
         btnLogout.setOnClickListener(v -> showLogoutConfirmation());
 
+        // Xử lý sự kiện cho BottomNavigationView
         BottomNavigationView bottomNavigationView = findViewById(R.id.bottomNavigation);
 
         bottomNavigationView.setOnItemSelectedListener(item -> {
             int itemId = item.getItemId();
-            if (itemId == R.id.navigation_home) {
+            if (itemId == R.id.navigation_home) {// Hiện tại đã ở Home, không cần làm gì
                 return true;
             } else if (itemId == R.id.navigation_expenses) {
+                // Chuyển đến Activity Manage Expense
                 startActivity(new Intent(HomeScreen.this, ManageExpenseActivity.class));
                 return true;
             } else if (itemId == R.id.navigation_profile) {
+                // Chuyển đến Activity Profile khi user click vào
                 startActivity(new Intent(HomeScreen.this, Profile.class));
                 return true;
             } else if (itemId == R.id.navigation_budget) {
+                // Chuyển đến Activity ManageBudgetActivity
                 startActivity(new Intent(HomeScreen.this, ManageBudgetActivity.class));
                 return true;
             }
