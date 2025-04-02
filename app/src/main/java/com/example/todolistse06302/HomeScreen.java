@@ -27,9 +27,14 @@ import java.util.Locale;
 import java.util.concurrent.TimeUnit;
 
 
+<<<<<<< HEAD
 public class HomeScreen extends AppCompatActivity {
 
     private MaterialButton btnManageExpense, btnLogout, btnReport;
+=======
+    private MaterialButton btnManageExpense, btnLogout, btnReport,btncost;
+
+>>>>>>> 21def786ec3bd78acad55c194a776b0644ce4088
 
     private FirebaseAuth mAuth;
     private SharedPreferences sharedPreferences;
@@ -45,6 +50,14 @@ public class HomeScreen extends AppCompatActivity {
 
         btnManageExpense = findViewById(R.id.btnManageExpense);
         btnLogout = findViewById(R.id.btnLogout);
+<<<<<<< HEAD
+=======
+
+        btncost = findViewById(R.id.btncost);
+
+
+
+>>>>>>> 21def786ec3bd78acad55c194a776b0644ce4088
         btnReport = findViewById(R.id.btnreport);
 
         btnReport.setOnClickListener(view -> {
@@ -57,6 +70,13 @@ public class HomeScreen extends AppCompatActivity {
             startActivity(intent);
         });
 
+        btncost.setOnClickListener(view -> {
+            Intent intent = new Intent(HomeScreen.this, CostOverview.class);
+            startActivity(intent);
+        });
+
+
+
         btnLogout.setOnClickListener(v -> showLogoutConfirmation());
         tvExpiringExpenses = findViewById(R.id.tvExpiringExpenses);
         checkExpiringRecurringExpenses();
@@ -64,8 +84,9 @@ public class HomeScreen extends AppCompatActivity {
         BottomNavigationView bottomNavigationView = findViewById(R.id.bottomNavigation);
         bottomNavigationView.setOnItemSelectedListener(item -> {
             int itemId = item.getItemId();
-            if (itemId == R.id.navigation_home) {
-                // Hiện tại đã ở Home, không cần làm gì
+
+            if (itemId == R.id.navigation_home) {// Hiện tại đã ở Home, không cần làm gì
+
                 return true;
             } else if (itemId == R.id.navigation_expenses) {
                 // Chuyển đến Activity Manage Expense
@@ -95,14 +116,22 @@ public class HomeScreen extends AppCompatActivity {
                 .setPositiveButton("Yes", (dialog, which) -> {
 
                     // Clear SharedPreferences
+
                     SharedPreferences.Editor editor = sharedPreferences.edit();
                     editor.clear();
                     editor.apply();
 
+
                     // Sign out from Firebase
+
                     if (mAuth.getCurrentUser() != null) {
                         mAuth.signOut();
                     }
+<<<<<<< HEAD
+=======
+
+
+>>>>>>> 21def786ec3bd78acad55c194a776b0644ce4088
                     // Return to login screen
 
                     Intent intent = new Intent(HomeScreen.this, MainActivity.class);

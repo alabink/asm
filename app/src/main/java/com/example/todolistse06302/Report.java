@@ -130,6 +130,8 @@ public class Report extends AppCompatActivity {
         List<String> labels = new ArrayList<>();
         int index = 0;
 
+
+
         for (Map.Entry<String, Double> entry : expenseData.entrySet()) {
             entries.add(new BarEntry(index, entry.getValue().floatValue()));
             labels.add(entry.getKey());
