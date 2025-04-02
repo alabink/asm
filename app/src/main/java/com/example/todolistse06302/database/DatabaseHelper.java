@@ -874,3 +874,5 @@ public class DatabaseHelper extends SQLiteOpenHelper {
         return categories;
     }
 }
+
+//tgbao
