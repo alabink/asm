@@ -80,6 +80,11 @@
         </activity>
         <activity android:name="com.example.todolistse06302.ManageExpenseActivity" />
 
+        <!-- Đã thêm khai báo cho CostOverview -->
+        <activity
+            android:name="com.example.todolistse06302.CostOverview"
+            android:exported="false" />
+
         <meta-data
             android:name="preloaded_fonts"
             android:resource="@array/preloaded_fonts" />

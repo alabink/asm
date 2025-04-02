@@ -27,15 +27,9 @@ import java.util.Locale;
 import java.util.concurrent.TimeUnit;
 
 
-<<<<<<< HEAD
+
 public class HomeScreen extends AppCompatActivity {
-
-    private MaterialButton btnManageExpense, btnLogout, btnReport;
-=======
     private MaterialButton btnManageExpense, btnLogout, btnReport,btncost;
-
->>>>>>> 21def786ec3bd78acad55c194a776b0644ce4088
-
     private FirebaseAuth mAuth;
     private SharedPreferences sharedPreferences;
     private TextView tvExpiringExpenses;
@@ -50,16 +44,9 @@ public class HomeScreen extends AppCompatActivity {
 
         btnManageExpense = findViewById(R.id.btnManageExpense);
         btnLogout = findViewById(R.id.btnLogout);
-<<<<<<< HEAD
-=======
 
         btncost = findViewById(R.id.btncost);
-
-
-
->>>>>>> 21def786ec3bd78acad55c194a776b0644ce4088
         btnReport = findViewById(R.id.btnreport);
-
         btnReport.setOnClickListener(view -> {
             Intent intent = new Intent(HomeScreen.this, Report.class);
             startActivity(intent);
@@ -127,11 +114,6 @@ public class HomeScreen extends AppCompatActivity {
                     if (mAuth.getCurrentUser() != null) {
                         mAuth.signOut();
                     }
-<<<<<<< HEAD
-=======
-
-
->>>>>>> 21def786ec3bd78acad55c194a776b0644ce4088
                     // Return to login screen
 
                     Intent intent = new Intent(HomeScreen.this, MainActivity.class);

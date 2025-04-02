@@ -381,12 +381,12 @@ public class DatabaseHelper extends SQLiteOpenHelper {
 
 
 
-<<<<<<< HEAD
+
     //     Modified getExpenses to filter by userId
-=======
+
 
 //     Modified getExpenses to filter by userId
->>>>>>> 21def786ec3bd78acad55c194a776b0644ce4088
+
 //    public Cursor getExpenses(int userId) {
 //        SQLiteDatabase db = this.getReadableDatabase();
 //        return db.query(TABLE_EXPENSES,
@@ -395,7 +395,7 @@ public class DatabaseHelper extends SQLiteOpenHelper {
 //                new String[]{String.valueOf(userId)},
 //                null, null, COLUMN_DATE + " DESC");
 //    }
-<<<<<<< HEAD
+
     public Cursor getExpenses(int userId) {
         SQLiteDatabase db = this.getReadableDatabase();
         return db.query(TABLE_EXPENSES,
@@ -404,17 +404,7 @@ public class DatabaseHelper extends SQLiteOpenHelper {
                 new String[]{String.valueOf(userId)},
                 null, null, COLUMN_DATE + " DESC");
     }
-=======
 
-public Cursor getExpenses(int userId) {
-    SQLiteDatabase db = this.getReadableDatabase();
-    return db.query(TABLE_EXPENSES,
-            null,
-            COLUMN_EXPENSE_USER_ID + " = ?",
-            new String[]{String.valueOf(userId)},
-            null, null, COLUMN_DATE + " DESC");
-}
->>>>>>> 21def786ec3bd78acad55c194a776b0644ce4088
 
 
 
@@ -789,12 +779,12 @@ public Cursor getExpenses(int userId) {
     }
 
 
-<<<<<<< HEAD
 
-    //    public List<String[]> getExpenses(int userId) {
-=======
+
+
+
 //    public List<String[]> getExpenses(int userId) {
->>>>>>> 21def786ec3bd78acad55c194a776b0644ce4088
+
 //        List<String[]> expensesList = new ArrayList<>();
 //        SQLiteDatabase db = this.getReadableDatabase();
 //

@@ -3306,6 +3306,7 @@ id btnSubmitRegister
 id btnUpdate
 id btnUpdateBudget
 id btnViewUserExpenses
+id btncost
 id btnreport
 id buttonPanel
 id cache_measures
@@ -3480,7 +3481,10 @@ id listViewUserExpenses
 id listViewUsers
 id list_item
 id lvBudgets
+id lvCategoryExpenses
+id lvDateExpenses
 id lvExpensesReport
+id lvMonthExpenses
 id m3_side_sheet
 id main
 id marquee
@@ -3737,6 +3741,7 @@ id tvCostName
 id tvEndDate
 id tvExpiringExpenses
 id tvRecurringAmount
+id tvRemainingBudget
 id tvReportTitle
 id tvStartDate
 id tvTotalExpense
@@ -3913,6 +3918,7 @@ layout activity_view_user_expense
 layout browser_actions_context_menu_page
 layout browser_actions_context_menu_row
 layout budget_item
+layout costoverview
 layout custom_dialog
 layout design_bottom_navigation_item
 layout design_bottom_sheet_dialog

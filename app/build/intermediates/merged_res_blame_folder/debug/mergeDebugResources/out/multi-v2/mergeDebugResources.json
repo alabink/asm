@@ -4930,25 +4930,6 @@
                     }
                 },
                 {
-                    "source": "C:\\Users\\phatl\\.gradle\\caches\\8.11.1\\transforms\\c51a08288ee85fb2eaab170b233a6c0e\\transformed\\recyclerview-1.1.0\\res\\values\\values.xml",
-                    "from": {
-                        "startLines": "2,3,4,5,6,7,8,9,10",
-                        "startColumns": "4,4,4,4,4,4,4,4,4",
-                        "startOffsets": "55,111,170,218,274,349,425,497,563",
-                        "endLines": "2,3,4,5,6,7,8,9,38",
-                        "endColumns": "55,58,47,55,74,75,71,65,24",
-                        "endOffsets": "106,165,213,269,344,420,492,558,2084"
-                    },
-                    "to": {
-                        "startLines": "529,1142,1143,1144,1152,1153,1154,1846,12783",
-                        "startColumns": "4,4,4,4,4,4,4,4,4",
-                        "startOffsets": "29454,71025,71084,71132,71799,71874,71950,125513,778138",
-                        "endLines": "529,1142,1143,1144,1152,1153,1154,1846,12803",
-                        "endColumns": "55,58,47,55,74,75,71,65,24",
-                        "endOffsets": "29505,71079,71127,71183,71869,71945,72017,125574,778973"
-                    }
-                },
-                {
                     "source": "E:\\ASMADTL\\app\\build\\generated\\res\\processDebugGoogleServices\\values\\values.xml",
                     "from": {
                         "startLines": "2,3,4,5,6,7",
@@ -5272,6 +5253,25 @@
                         "startOffsets": "36692,61288",
                         "endColumns": "41,41",
                         "endOffsets": "36729,61325"
+                    }
+                },
+                {
+                    "source": "C:\\Users\\phatl\\.gradle\\caches\\8.11.1\\transforms\\fb195f472fa0fdc5d1cd52c706544ec9\\transformed\\recyclerview-1.2.1\\res\\values\\values.xml",
+                    "from": {
+                        "startLines": "2,3,4,5,6,7,8,9,10",
+                        "startColumns": "4,4,4,4,4,4,4,4,4",
+                        "startOffsets": "55,111,170,218,274,349,425,497,563",
+                        "endLines": "2,3,4,5,6,7,8,9,38",
+                        "endColumns": "55,58,47,55,74,75,71,65,24",
+                        "endOffsets": "106,165,213,269,344,420,492,558,2084"
+                    },
+                    "to": {
+                        "startLines": "529,1142,1143,1144,1152,1153,1154,1846,12783",
+                        "startColumns": "4,4,4,4,4,4,4,4,4",
+                        "startOffsets": "29454,71025,71084,71132,71799,71874,71950,125513,778138",
+                        "endLines": "529,1142,1143,1144,1152,1153,1154,1846,12803",
+                        "endColumns": "55,58,47,55,74,75,71,65,24",
+                        "endOffsets": "29505,71079,71127,71183,71869,71945,72017,125574,778973"
                     }
                 },
                 {

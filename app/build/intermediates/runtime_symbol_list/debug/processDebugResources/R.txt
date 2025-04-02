@@ -3305,6 +3305,7 @@ int id btnSubmitRegister 0x7f0a007c
 int id btnUpdate 0x7f0a007d
 int id btnUpdateBudget 0x7f0a007e
 int id btnViewUserExpenses 0x7f0a007f
+int id btncost 0x7f0a025c
 int id btnreport 0x7f0a0080
 int id buttonPanel 0x7f0a0081
 int id cache_measures 0x7f0a0082
@@ -3479,7 +3480,10 @@ int id listViewUserExpenses 0x7f0a012a
 int id listViewUsers 0x7f0a012b
 int id list_item 0x7f0a012c
 int id lvBudgets 0x7f0a012d
+int id lvCategoryExpenses 0x7f0a025d
+int id lvDateExpenses 0x7f0a025e
 int id lvExpensesReport 0x7f0a012e
+int id lvMonthExpenses 0x7f0a025f
 int id m3_side_sheet 0x7f0a012f
 int id main 0x7f0a0130
 int id marquee 0x7f0a0131
@@ -3736,6 +3740,7 @@ int id tvCostName 0x7f0a022b
 int id tvEndDate 0x7f0a022c
 int id tvExpiringExpenses 0x7f0a022d
 int id tvRecurringAmount 0x7f0a022e
+int id tvRemainingBudget 0x7f0a0260
 int id tvReportTitle 0x7f0a022f
 int id tvStartDate 0x7f0a0230
 int id tvTotalExpense 0x7f0a0231
@@ -3912,6 +3917,7 @@ int layout activity_view_user_expense 0x7f0d0028
 int layout browser_actions_context_menu_page 0x7f0d0029
 int layout browser_actions_context_menu_row 0x7f0d002a
 int layout budget_item 0x7f0d002b
+int layout costoverview 0x7f0d0084
 int layout custom_dialog 0x7f0d002c
 int layout design_bottom_navigation_item 0x7f0d002d
 int layout design_bottom_sheet_dialog 0x7f0d002e

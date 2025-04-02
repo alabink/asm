@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.constraintlayout.widget.ConstraintLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/main"
@@ -33,40 +34,22 @@
         app:layout_constraintEnd_toEndOf="parent"
         android:layout_marginTop="16dp" />
 
+    <!-- Expense Report Button -->
+
     <!-- Manage Expenses Button -->
-
-    <!-- Logout Button -->
-
-    <com.google.android.material.button.MaterialButton
-        android:id="@+id/btnManageExpense"
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        android:layout_marginHorizontal="32dp"
-        android:layout_marginTop="168dp"
-        android:backgroundTint="#1A237E"
-        android:text="Manage Expenses"
-        android:textColor="@android:color/white"
-        android:textSize="16sp"
-        app:cornerRadius="12dp"
-        app:icon="@drawable/ic_manage"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/imageView" />
-
     <com.google.android.material.button.MaterialButton
         android:id="@+id/btnreport"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_marginHorizontal="32dp"
-        android:layout_marginTop="104dp"
+        android:layout_marginTop="80dp"
         android:backgroundTint="#1A237E"
-        android:text="Expense report"
+        android:text="Expense Report"
         android:textColor="@android:color/white"
         android:textSize="16sp"
         app:cornerRadius="12dp"
         app:icon="@drawable/ic_money"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="1.0"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@id/imageView" />
 
@@ -75,7 +58,7 @@
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_marginHorizontal="32dp"
-        android:layout_marginTop="20dp"
+        android:layout_marginTop="36dp"
         android:backgroundTint="#E0115F"
         android:text="Logout"
         android:textColor="@android:color/white"
@@ -83,9 +66,47 @@
         app:cornerRadius="12dp"
         app:icon="@drawable/ic_logout"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="1.0"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/btncost" />
+
+    <com.google.android.material.button.MaterialButton
+        android:id="@+id/btncost"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginHorizontal="32dp"
+        android:layout_marginTop="28dp"
+        android:backgroundTint="#1A237E"
+        android:text="Cost Overview"
+        android:textColor="@android:color/white"
+        android:textSize="16sp"
+        app:cornerRadius="12dp"
+        app:icon="@drawable/ic_manage"
+        app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@id/btnManageExpense" />
 
+    <com.google.android.material.button.MaterialButton
+        android:id="@+id/btnManageExpense"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginHorizontal="32dp"
+        android:layout_marginTop="27dp"
+        android:backgroundTint="#1A237E"
+        android:text="Manage Expenses"
+        android:textColor="@android:color/white"
+        android:textSize="16sp"
+        app:cornerRadius="12dp"
+        app:icon="@drawable/ic_manage"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/btnreport" />
+
+    <!-- Cost Overview Button -->
+
+    <!-- Logout Button -->
+
+    <!-- Bottom Navigation -->
     <com.google.android.material.bottomnavigation.BottomNavigationView
         android:id="@+id/bottomNavigation"
         android:layout_width="match_parent"
@@ -98,21 +119,20 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent" />
 
+    <!-- Expiring Expenses Notification -->
     <LinearLayout
         android:id="@+id/layoutExpiringExpenses"
-        android:layout_width="347dp"
-        android:layout_height="65dp"
-        android:layout_marginStart="32dp"
-        android:layout_marginEnd="32dp"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginHorizontal="32dp"
         android:layout_marginBottom="92dp"
         android:background="@drawable/bgr_bg"
         android:gravity="center_vertical"
         android:orientation="horizontal"
         android:padding="10dp"
-        app:layout_constraintBottom_toTopOf="@+id/btnManageExpense"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.0"
-        app:layout_constraintStart_toStartOf="parent">
+        app:layout_constraintBottom_toTopOf="@id/btnManageExpense"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent">
 
         <ImageView
             android:layout_width="24dp"
@@ -122,11 +142,13 @@
 
         <TextView
             android:id="@+id/tvExpiringExpenses"
-            android:layout_width="269dp"
-            android:layout_height="39dp"
+            android:layout_width="180dp"
+            android:layout_height="36dp"
+            android:layout_weight="1"
             android:text="No upcoming expenses"
             android:textColor="@color/black"
             android:textSize="10sp"
             android:textStyle="bold" />
     </LinearLayout>
+
 </androidx.constraintlayout.widget.ConstraintLayout>

@@ -50,6 +50,7 @@ id btnSubmitRegister
 id btnUpdate
 id btnUpdateBudget
 id btnViewUserExpenses
+id btncost
 id btnreport
 id deleteButton
 id editAmount
@@ -77,7 +78,10 @@ id listViewRecurringCosts
 id listViewUserExpenses
 id listViewUsers
 id lvBudgets
+id lvCategoryExpenses
+id lvDateExpenses
 id lvExpensesReport
+id lvMonthExpenses
 id main
 id navigation_ChiPhi
 id navigation_budget
@@ -98,6 +102,7 @@ id tvCostName
 id tvEndDate
 id tvExpiringExpenses
 id tvRecurringAmount
+id tvRemainingBudget
 id tvReportTitle
 id tvStartDate
 id tvTotalExpense
@@ -132,6 +137,7 @@ layout activity_report
 layout activity_show_users
 layout activity_view_user_expense
 layout budget_item
+layout costoverview
 layout dialog_edit_role
 layout expense_item
 layout item_recurring_cost
