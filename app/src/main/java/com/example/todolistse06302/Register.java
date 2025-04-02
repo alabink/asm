@@ -84,6 +84,8 @@ public class Register extends AppCompatActivity {
             Log.d("test","abc");
         }
     }
+
 }
+
 
 

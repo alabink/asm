@@ -35,6 +35,7 @@ public class ManageExpenseActivity extends AppCompatActivity {
     private ArrayAdapter<String> categoryAdapter;
     private String currentUserEmail;
 
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -83,8 +84,6 @@ public class ManageExpenseActivity extends AppCompatActivity {
         }
         categoryAdapter.notifyDataSetChanged();
     }
-
-
     private void setupListeners() {
         editDate.setOnClickListener(v -> showDatePicker());
 
@@ -199,19 +198,17 @@ public class ManageExpenseActivity extends AppCompatActivity {
                 Toast.makeText(this, "Please select an expense to delete", Toast.LENGTH_SHORT).show();
             }
         });
-
         listViewExpenses.setOnItemClickListener((parent, view, position, id) -> {
             if (position >= 0 && position < expenses.size()) {
                 Expense expense = expenses.get(position);
                 selectedExpenseId = expense.getId();
                 editAmount.setText(String.valueOf(expense.getAmount()));
-                
+
                 // Find and set the spinner position
                 int categoryPosition = categories.indexOf(expense.getCategory());
                 if (categoryPosition >= 0) {
                     spinnerCategory.setSelection(categoryPosition);
                 }
-                
                 editDate.setText(expense.getDate());
             }
         });
@@ -233,6 +230,10 @@ public class ManageExpenseActivity extends AppCompatActivity {
             } else if (itemId == R.id.navigation_profile) {
                 startActivity(new Intent(this, Profile.class));
                 return true;
+            }else if (itemId == R.id.navigation_ChiPhi) {
+                // Chuyển đến Activity RecurringExpenseActivity
+                startActivity(new Intent(this, RecurringExpenseActivity.class));
+                return true;
             }
             return false;
         });
@@ -240,6 +241,7 @@ public class ManageExpenseActivity extends AppCompatActivity {
 
     private void showDatePicker() {
         DatePickerDialog datePickerDialog = new DatePickerDialog(
+
             this,
             (view, year, month, dayOfMonth) -> {
                 calendar.set(Calendar.YEAR, year);

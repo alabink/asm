@@ -35,7 +35,6 @@ public class MainActivity extends AppCompatActivity {
 
         // Initialize Firebase Auth
         mAuth = FirebaseAuth.getInstance();
-        
         dbHelper = new DatabaseHelper(this);
         sharedPreferences = getSharedPreferences("MyPrefs", MODE_PRIVATE);
 
@@ -128,6 +127,7 @@ public class MainActivity extends AppCompatActivity {
         try {
             // Check if user exists in SQLite
             Cursor cursor = dbHelper.getReadableDatabase().query(
+
                 DatabaseHelper.TABLE_USERS,
                 new String[]{DatabaseHelper.COLUMN_USER_ID},
                 DatabaseHelper.COLUMN_EMAIL + "=?",

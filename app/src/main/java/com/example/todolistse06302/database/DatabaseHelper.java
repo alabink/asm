@@ -11,6 +11,7 @@ import androidx.annotation.Nullable;
 
 import com.example.todolistse06302.Budget;
 import com.example.todolistse06302.Expense;
+import com.example.todolistse06302.RecurringExpense;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -20,7 +21,7 @@ import java.util.HashMap;
 public class DatabaseHelper extends SQLiteOpenHelper {
 
     private static final String DATABASE_NAME = "concac";
-    private static final int DATABASE_VERSION = 10;
+    private static final int DATABASE_VERSION = 20;
 
     // User table constants
     public static final String TABLE_USERS = "users";
@@ -46,6 +47,14 @@ public class DatabaseHelper extends SQLiteOpenHelper {
     public static final String COLUMN_REMAINING_BUDGET = "remaining_budget";
     public static final String COLUMN_BUDGET_CATEGORY = "category";
     public static final String COLUMN_BUDGET_USER_ID = "user_id";
+    //Recurring table
+    public static final String TABLE_RECURRING = "RecurringExpenses";
+    public static final String COLUMN_RECURRING_ID = "id";
+    public static final String COLUMN_NAME = "name";
+    public static final String COLUMN_AMOUNTT = "amountt";
+    public static final String COLUMN_START_DATE = "start_date";
+    public static final String COLUMN_END_DATE = "end_date";
+    public static final String COLUMN_RECURRING_USER_ID = "user_id";
 
     public DatabaseHelper(@Nullable Context context) {
         super(context, DATABASE_NAME, null, DATABASE_VERSION);
@@ -81,6 +90,16 @@ public class DatabaseHelper extends SQLiteOpenHelper {
                     + COLUMN_BUDGET_USER_ID + " INTEGER, "
                     + "FOREIGN KEY(" + COLUMN_BUDGET_USER_ID + ") REFERENCES " + TABLE_USERS + "(" + COLUMN_USER_ID + "))";
             db.execSQL(CREATE_BUDGETS_TABLE);
+            //Create recurring table
+            String createTable = "CREATE TABLE " + TABLE_RECURRING + " (" +
+                    COLUMN_RECURRING_ID + " INTEGER PRIMARY KEY AUTOINCREMENT, " +
+                    COLUMN_NAME + " TEXT NOT NULL, " +
+                    COLUMN_AMOUNTT + " REAL NOT NULL, " +
+                    COLUMN_START_DATE + " TEXT NOT NULL, " +
+                    COLUMN_END_DATE + " TEXT NOT NULL,"
+                    + COLUMN_RECURRING_USER_ID + " INTEGER, "
+                    + "FOREIGN KEY(" + COLUMN_RECURRING_USER_ID + ") REFERENCES " + TABLE_RECURRING + "(" + COLUMN_RECURRING_ID + "))";
+            db.execSQL(createTable);
 
             // Create default admin account
             ContentValues adminValues = new ContentValues();
@@ -102,6 +121,7 @@ public class DatabaseHelper extends SQLiteOpenHelper {
             db.execSQL("DROP TABLE IF EXISTS " + TABLE_USERS);
             db.execSQL("DROP TABLE IF EXISTS " + TABLE_EXPENSES);
             db.execSQL("DROP TABLE IF EXISTS " + TABLE_BUDGETS);
+            db.execSQL("DROP TABLE IF EXISTS " + TABLE_RECURRING);
 
             // Recreate tables
             onCreate(db);
@@ -361,7 +381,7 @@ public class DatabaseHelper extends SQLiteOpenHelper {
 
 
 
-//     Modified getExpenses to filter by userId
+    //     Modified getExpenses to filter by userId
 //    public Cursor getExpenses(int userId) {
 //        SQLiteDatabase db = this.getReadableDatabase();
 //        return db.query(TABLE_EXPENSES,
@@ -370,14 +390,14 @@ public class DatabaseHelper extends SQLiteOpenHelper {
 //                new String[]{String.valueOf(userId)},
 //                null, null, COLUMN_DATE + " DESC");
 //    }
-public Cursor getExpenses(int userId) {
-    SQLiteDatabase db = this.getReadableDatabase();
-    return db.query(TABLE_EXPENSES,
-            null,
-            COLUMN_EXPENSE_USER_ID + " = ?",
-            new String[]{String.valueOf(userId)},
-            null, null, COLUMN_DATE + " DESC");
-}
+    public Cursor getExpenses(int userId) {
+        SQLiteDatabase db = this.getReadableDatabase();
+        return db.query(TABLE_EXPENSES,
+                null,
+                COLUMN_EXPENSE_USER_ID + " = ?",
+                new String[]{String.valueOf(userId)},
+                null, null, COLUMN_DATE + " DESC");
+    }
 
 
 
@@ -753,7 +773,7 @@ public Cursor getExpenses(int userId) {
 
 
 
-//    public List<String[]> getExpenses(int userId) {
+    //    public List<String[]> getExpenses(int userId) {
 //        List<String[]> expensesList = new ArrayList<>();
 //        SQLiteDatabase db = this.getReadableDatabase();
 //
@@ -931,6 +951,70 @@ public Cursor getExpenses(int userId) {
         }
 
         return categories;
+    }
+    // recurring
+    public void addRecurringExpense(String name, double amount, String startDate, String endDate, int userId) {
+        SQLiteDatabase db = this.getWritableDatabase();
+        ContentValues values = new ContentValues();
+        values.put(COLUMN_NAME, name);
+        values.put(COLUMN_AMOUNTT, amount);
+        values.put(COLUMN_START_DATE, startDate);
+        values.put(COLUMN_END_DATE, endDate);
+        values.put(COLUMN_RECURRING_USER_ID, userId);
+
+        long result = db.insert(TABLE_RECURRING, null, values);
+        if (result == -1) {
+            Log.e("ERROR", "Failed to insert expense for user ID: " + userId);
+        } else {
+            Log.d("DEBUG", "Inserted expense ID: " + result);
+        }
+        db.close();
+    }
+
+    public List<RecurringExpense> getRecurringExpenses(int userId) {
+        List<RecurringExpense> expenses = new ArrayList<>();
+        SQLiteDatabase db = this.getReadableDatabase();
+
+        Cursor cursor = db.query(TABLE_RECURRING, null, COLUMN_RECURRING_USER_ID + "=?", new String[]{String.valueOf(userId)}, null, null, null);
+
+        if (cursor != null) {
+            Log.d("DEBUG", "Found " + cursor.getCount() + " expenses for user ID: " + userId);
+            while (cursor.moveToNext()) {
+                int id = cursor.getInt(cursor.getColumnIndexOrThrow(COLUMN_RECURRING_ID));
+                String name = cursor.getString(cursor.getColumnIndexOrThrow(COLUMN_NAME));
+                double amount = cursor.getDouble(cursor.getColumnIndexOrThrow(COLUMN_AMOUNTT));
+                String startDate = cursor.getString(cursor.getColumnIndexOrThrow(COLUMN_START_DATE));
+                String endDate = cursor.getString(cursor.getColumnIndexOrThrow(COLUMN_END_DATE));
+
+
+                expenses.add(new RecurringExpense(id, name, amount, startDate, endDate));
+            }
+            cursor.close();
+        } else {
+            Log.e("ERROR", "Failed to load expenses for user ID: " + userId);
+        }
+
+        db.close();
+        return expenses;
+    }
+
+
+    public void editcost(int expenseId, String name, double amount, String startDate, String endDate, int userId) {
+        SQLiteDatabase db = this.getWritableDatabase();
+        ContentValues values = new ContentValues();
+        values.put(COLUMN_NAME, name);
+        values.put(COLUMN_AMOUNTT, amount);
+        values.put(COLUMN_START_DATE, startDate);
+        values.put(COLUMN_END_DATE, endDate);
+
+        // Sử dụng tên cột đúng
+        db.update(TABLE_RECURRING, values, COLUMN_RECURRING_ID + " = ? AND " + COLUMN_RECURRING_USER_ID + " = ?", new String[]{String.valueOf(expenseId), String.valueOf(userId)});
+        db.close();
+    }
+    public void deleteCost(int expenseId, int userId) {
+        SQLiteDatabase db = this.getWritableDatabase();
+        db.delete(TABLE_RECURRING, COLUMN_RECURRING_ID + " = ? AND " + COLUMN_RECURRING_USER_ID + " = ?", new String[]{String.valueOf(expenseId), String.valueOf(userId)});
+        db.close();
     }
 
 

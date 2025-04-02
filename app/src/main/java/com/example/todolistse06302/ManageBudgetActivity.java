@@ -41,7 +41,6 @@ public class ManageBudgetActivity extends AppCompatActivity {
             // Get current user ID from SharedPreferences
             SharedPreferences sharedPreferences = getSharedPreferences("MyPrefs", MODE_PRIVATE);
             currentUserId = sharedPreferences.getInt("userId", -1);
-            
             if (currentUserId == -1) {
                 Toast.makeText(this, "Please login first", Toast.LENGTH_SHORT).show();
                 finish();
@@ -118,7 +117,6 @@ public class ManageBudgetActivity extends AppCompatActivity {
                 if (position >= 0 && position < budgets.size()) {
                     Budget budget = budgets.get(position);
                     selectedBudgetId = budget.getId();
-                    
                     // Remove currency formatting for editing
                     String editableAmount = String.valueOf(budget.getTotalBudget());
                     editBudgetAmount.setText(editableAmount);
@@ -146,6 +144,10 @@ public class ManageBudgetActivity extends AppCompatActivity {
             } else if (itemId == R.id.navigation_budget) {
                 // Already on budget screen
                 return true;
+            }else if (itemId == R.id.navigation_ChiPhi) {
+                startActivity(new Intent(this, RecurringExpenseActivity.class));
+                return true;
+
             }
             return false;
         });
@@ -165,7 +167,6 @@ public class ManageBudgetActivity extends AppCompatActivity {
         String message = String.format("Are you sure you want to delete budget for %s (%s)?", 
             selectedBudget.getCategory(),
             currencyFormatter.format(selectedBudget.getTotalBudget()));
-
         new AlertDialog.Builder(this)
                 .setTitle("Delete Budget")
                 .setMessage(message)
@@ -218,5 +219,6 @@ public class ManageBudgetActivity extends AppCompatActivity {
             dbHelper.close();
         }
     }
+
 }
 

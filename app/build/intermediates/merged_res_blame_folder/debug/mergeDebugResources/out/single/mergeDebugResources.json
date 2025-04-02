@@ -1,0 +1,254 @@
+[
+    {
+        "merged": "C:\\Users\\phatl\\.gradle\\daemon\\8.11.1\\com.example.todolistse06302.app-debug-36:\\mipmap-xxxhdpi_ic_launcher.webp.flat",
+        "source": "C:\\Users\\phatl\\.gradle\\daemon\\8.11.1\\com.example.todolistse06302.app-main-38:\\mipmap-xxxhdpi\\ic_launcher.webp"
+    },
+    {
+        "merged": "C:\\Users\\phatl\\.gradle\\daemon\\8.11.1\\com.example.todolistse06302.app-debug-36:\\drawable_ic_expense.png.flat",
+        "source": "C:\\Users\\phatl\\.gradle\\daemon\\8.11.1\\com.example.todolistse06302.app-main-38:\\drawable\\ic_expense.png"
+    },
+    {
+        "merged": "C:\\Users\\phatl\\.gradle\\daemon\\8.11.1\\com.example.todolistse06302.app-debug-36:\\drawable_ic_transaction.png.flat",
+        "source": "C:\\Users\\phatl\\.gradle\\daemon\\8.11.1\\com.example.todolistse06302.app-main-38:\\drawable\\ic_transaction.png"
+    },
+    {
+        "merged": "C:\\Users\\phatl\\.gradle\\daemon\\8.11.1\\com.example.todolistse06302.app-debug-36:\\layout_activity_show_users.xml.flat",
+        "source": "C:\\Users\\phatl\\.gradle\\daemon\\8.11.1\\com.example.todolistse06302.app-main-38:\\layout\\activity_show_users.xml"
+    },
+    {
+        "merged": "C:\\Users\\phatl\\.gradle\\daemon\\8.11.1\\com.example.todolistse06302.app-debug-36:\\drawable_ic_launcher_foreground.xml.flat",
+        "source": "C:\\Users\\phatl\\.gradle\\daemon\\8.11.1\\com.example.todolistse06302.app-main-38:\\drawable\\ic_launcher_foreground.xml"
+    },
+    {
+        "merged": "C:\\Users\\phatl\\.gradle\\daemon\\8.11.1\\com.example.todolistse06302.app-debug-36:\\layout_activity_main.xml.flat",
+        "source": "C:\\Users\\phatl\\.gradle\\daemon\\8.11.1\\com.example.todolistse06302.app-main-38:\\layout\\activity_main.xml"
+    },
+    {
+        "merged": "C:\\Users\\phatl\\.gradle\\daemon\\8.11.1\\com.example.todolistse06302.app-debug-36:\\drawable_ic_logout.png.flat",
+        "source": "C:\\Users\\phatl\\.gradle\\daemon\\8.11.1\\com.example.todolistse06302.app-main-38:\\drawable\\ic_logout.png"
+    },
+    {
+        "merged": "C:\\Users\\phatl\\.gradle\\daemon\\8.11.1\\com.example.todolistse06302.app-debug-36:\\drawable_ic_chiphi1.png.flat",
+        "source": "C:\\Users\\phatl\\.gradle\\daemon\\8.11.1\\com.example.todolistse06302.app-main-38:\\drawable\\ic_chiphi1.png"
+    },
+    {
+        "merged": "C:\\Users\\phatl\\.gradle\\daemon\\8.11.1\\com.example.todolistse06302.app-debug-36:\\layout_activity_manage_budget.xml.flat",
+        "source": "C:\\Users\\phatl\\.gradle\\daemon\\8.11.1\\com.example.todolistse06302.app-main-38:\\layout\\activity_manage_budget.xml"
+    },
+    {
+        "merged": "C:\\Users\\phatl\\.gradle\\daemon\\8.11.1\\com.example.todolistse06302.app-debug-36:\\font_adlam_display.xml.flat",
+        "source": "C:\\Users\\phatl\\.gradle\\daemon\\8.11.1\\com.example.todolistse06302.app-main-38:\\font\\adlam_display.xml"
+    },
+    {
+        "merged": "C:\\Users\\phatl\\.gradle\\daemon\\8.11.1\\com.example.todolistse06302.app-debug-36:\\xml_data_extraction_rules.xml.flat",
+        "source": "C:\\Users\\phatl\\.gradle\\daemon\\8.11.1\\com.example.todolistse06302.app-main-38:\\xml\\data_extraction_rules.xml"
+    },
+    {
+        "merged": "C:\\Users\\phatl\\.gradle\\daemon\\8.11.1\\com.example.todolistse06302.app-debug-36:\\drawable_spinner_background.xml.flat",
+        "source": "C:\\Users\\phatl\\.gradle\\daemon\\8.11.1\\com.example.todolistse06302.app-main-38:\\drawable\\spinner_background.xml"
+    },
+    {
+        "merged": "C:\\Users\\phatl\\.gradle\\daemon\\8.11.1\\com.example.todolistse06302.app-debug-36:\\layout_spinner_item.xml.flat",
+        "source": "C:\\Users\\phatl\\.gradle\\daemon\\8.11.1\\com.example.todolistse06302.app-main-38:\\layout\\spinner_item.xml"
+    },
+    {
+        "merged": "C:\\Users\\phatl\\.gradle\\daemon\\8.11.1\\com.example.todolistse06302.app-debug-36:\\layout_activity_register.xml.flat",
+        "source": "C:\\Users\\phatl\\.gradle\\daemon\\8.11.1\\com.example.todolistse06302.app-main-38:\\layout\\activity_register.xml"
+    },
+    {
+        "merged": "C:\\Users\\phatl\\.gradle\\daemon\\8.11.1\\com.example.todolistse06302.app-debug-36:\\mipmap-hdpi_ic_launcher.webp.flat",
+        "source": "C:\\Users\\phatl\\.gradle\\daemon\\8.11.1\\com.example.todolistse06302.app-main-38:\\mipmap-hdpi\\ic_launcher.webp"
+    },
+    {
+        "merged": "C:\\Users\\phatl\\.gradle\\daemon\\8.11.1\\com.example.todolistse06302.app-debug-36:\\layout_activity_admin_dashboard.xml.flat",
+        "source": "C:\\Users\\phatl\\.gradle\\daemon\\8.11.1\\com.example.todolistse06302.app-main-38:\\layout\\activity_admin_dashboard.xml"
+    },
+    {
+        "merged": "C:\\Users\\phatl\\.gradle\\daemon\\8.11.1\\com.example.todolistse06302.app-debug-36:\\xml_backup_rules.xml.flat",
+        "source": "C:\\Users\\phatl\\.gradle\\daemon\\8.11.1\\com.example.todolistse06302.app-main-38:\\xml\\backup_rules.xml"
+    },
+    {
+        "merged": "C:\\Users\\phatl\\.gradle\\daemon\\8.11.1\\com.example.todolistse06302.app-debug-36:\\layout_user_list_item.xml.flat",
+        "source": "C:\\Users\\phatl\\.gradle\\daemon\\8.11.1\\com.example.todolistse06302.app-main-38:\\layout\\user_list_item.xml"
+    },
+    {
+        "merged": "C:\\Users\\phatl\\.gradle\\daemon\\8.11.1\\com.example.todolistse06302.app-debug-36:\\layout_activity_profile.xml.flat",
+        "source": "C:\\Users\\phatl\\.gradle\\daemon\\8.11.1\\com.example.todolistse06302.app-main-38:\\layout\\activity_profile.xml"
+    },
+    {
+        "merged": "C:\\Users\\phatl\\.gradle\\daemon\\8.11.1\\com.example.todolistse06302.app-debug-36:\\layout_activity_recurring_costs.xml.flat",
+        "source": "C:\\Users\\phatl\\.gradle\\daemon\\8.11.1\\com.example.todolistse06302.app-main-38:\\layout\\activity_recurring_costs.xml"
+    },
+    {
+        "merged": "C:\\Users\\phatl\\.gradle\\daemon\\8.11.1\\com.example.todolistse06302.app-debug-36:\\drawable_ic_launcher_background.xml.flat",
+        "source": "C:\\Users\\phatl\\.gradle\\daemon\\8.11.1\\com.example.todolistse06302.app-main-38:\\drawable\\ic_launcher_background.xml"
+    },
+    {
+        "merged": "C:\\Users\\phatl\\.gradle\\daemon\\8.11.1\\com.example.todolistse06302.app-debug-36:\\drawable_ic_user.png.flat",
+        "source": "C:\\Users\\phatl\\.gradle\\daemon\\8.11.1\\com.example.todolistse06302.app-main-38:\\drawable\\ic_user.png"
+    },
+    {
+        "merged": "C:\\Users\\phatl\\.gradle\\daemon\\8.11.1\\com.example.todolistse06302.app-debug-36:\\drawable_baseline_email_24.xml.flat",
+        "source": "C:\\Users\\phatl\\.gradle\\daemon\\8.11.1\\com.example.todolistse06302.app-main-38:\\drawable\\baseline_email_24.xml"
+    },
+    {
+        "merged": "C:\\Users\\phatl\\.gradle\\daemon\\8.11.1\\com.example.todolistse06302.app-debug-36:\\layout_login.xml.flat",
+        "source": "C:\\Users\\phatl\\.gradle\\daemon\\8.11.1\\com.example.todolistse06302.app-main-38:\\layout\\login.xml"
+    },
+    {
+        "merged": "C:\\Users\\phatl\\.gradle\\daemon\\8.11.1\\com.example.todolistse06302.app-debug-36:\\mipmap-xxhdpi_ic_launcher.webp.flat",
+        "source": "C:\\Users\\phatl\\.gradle\\daemon\\8.11.1\\com.example.todolistse06302.app-main-38:\\mipmap-xxhdpi\\ic_launcher.webp"
+    },
+    {
+        "merged": "C:\\Users\\phatl\\.gradle\\daemon\\8.11.1\\com.example.todolistse06302.app-debug-36:\\layout_expense_item.xml.flat",
+        "source": "C:\\Users\\phatl\\.gradle\\daemon\\8.11.1\\com.example.todolistse06302.app-main-38:\\layout\\expense_item.xml"
+    },
+    {
+        "merged": "C:\\Users\\phatl\\.gradle\\daemon\\8.11.1\\com.example.todolistse06302.app-debug-36:\\mipmap-mdpi_ic_launcher_round.webp.flat",
+        "source": "C:\\Users\\phatl\\.gradle\\daemon\\8.11.1\\com.example.todolistse06302.app-main-38:\\mipmap-mdpi\\ic_launcher_round.webp"
+    },
+    {
+        "merged": "C:\\Users\\phatl\\.gradle\\daemon\\8.11.1\\com.example.todolistse06302.app-debug-36:\\drawable_bgr_bg.xml.flat",
+        "source": "C:\\Users\\phatl\\.gradle\\daemon\\8.11.1\\com.example.todolistse06302.app-main-38:\\drawable\\bgr_bg.xml"
+    },
+    {
+        "merged": "C:\\Users\\phatl\\.gradle\\daemon\\8.11.1\\com.example.todolistse06302.app-debug-36:\\drawable_cem.png.flat",
+        "source": "C:\\Users\\phatl\\.gradle\\daemon\\8.11.1\\com.example.todolistse06302.app-main-38:\\drawable\\cem.png"
+    },
+    {
+        "merged": "C:\\Users\\phatl\\.gradle\\daemon\\8.11.1\\com.example.todolistse06302.app-debug-36:\\mipmap-anydpi_ic_launcher_round.xml.flat",
+        "source": "C:\\Users\\phatl\\.gradle\\daemon\\8.11.1\\com.example.todolistse06302.app-main-38:\\mipmap-anydpi\\ic_launcher_round.xml"
+    },
+    {
+        "merged": "C:\\Users\\phatl\\.gradle\\daemon\\8.11.1\\com.example.todolistse06302.app-debug-36:\\layout_activity_admin_panel_profile.xml.flat",
+        "source": "C:\\Users\\phatl\\.gradle\\daemon\\8.11.1\\com.example.todolistse06302.app-main-38:\\layout\\activity_admin_panel_profile.xml"
+    },
+    {
+        "merged": "C:\\Users\\phatl\\.gradle\\daemon\\8.11.1\\com.example.todolistse06302.app-debug-36:\\mipmap-xxhdpi_ic_launcher_round.webp.flat",
+        "source": "C:\\Users\\phatl\\.gradle\\daemon\\8.11.1\\com.example.todolistse06302.app-main-38:\\mipmap-xxhdpi\\ic_launcher_round.webp"
+    },
+    {
+        "merged": "C:\\Users\\phatl\\.gradle\\daemon\\8.11.1\\com.example.todolistse06302.app-debug-36:\\layout_dialog_edit_role.xml.flat",
+        "source": "C:\\Users\\phatl\\.gradle\\daemon\\8.11.1\\com.example.todolistse06302.app-main-38:\\layout\\dialog_edit_role.xml"
+    },
+    {
+        "merged": "C:\\Users\\phatl\\.gradle\\daemon\\8.11.1\\com.example.todolistse06302.app-debug-36:\\layout_item_recurring_cost.xml.flat",
+        "source": "C:\\Users\\phatl\\.gradle\\daemon\\8.11.1\\com.example.todolistse06302.app-main-38:\\layout\\item_recurring_cost.xml"
+    },
+    {
+        "merged": "C:\\Users\\phatl\\.gradle\\daemon\\8.11.1\\com.example.todolistse06302.app-debug-36:\\layout_activity_manage_expense.xml.flat",
+        "source": "C:\\Users\\phatl\\.gradle\\daemon\\8.11.1\\com.example.todolistse06302.app-main-38:\\layout\\activity_manage_expense.xml"
+    },
+    {
+        "merged": "C:\\Users\\phatl\\.gradle\\daemon\\8.11.1\\com.example.todolistse06302.app-debug-36:\\layout_activity_home_screen.xml.flat",
+        "source": "C:\\Users\\phatl\\.gradle\\daemon\\8.11.1\\com.example.todolistse06302.app-main-38:\\layout\\activity_home_screen.xml"
+    },
+    {
+        "merged": "C:\\Users\\phatl\\.gradle\\daemon\\8.11.1\\com.example.todolistse06302.app-debug-36:\\layout_activity_view_user_expense.xml.flat",
+        "source": "C:\\Users\\phatl\\.gradle\\daemon\\8.11.1\\com.example.todolistse06302.app-main-38:\\layout\\activity_view_user_expense.xml"
+    },
+    {
+        "merged": "C:\\Users\\phatl\\.gradle\\daemon\\8.11.1\\com.example.todolistse06302.app-debug-36:\\layout_spinner_dropdown_item.xml.flat",
+        "source": "C:\\Users\\phatl\\.gradle\\daemon\\8.11.1\\com.example.todolistse06302.app-main-38:\\layout\\spinner_dropdown_item.xml"
+    },
+    {
+        "merged": "C:\\Users\\phatl\\.gradle\\daemon\\8.11.1\\com.example.todolistse06302.app-debug-36:\\mipmap-xhdpi_ic_launcher_round.webp.flat",
+        "source": "C:\\Users\\phatl\\.gradle\\daemon\\8.11.1\\com.example.todolistse06302.app-main-38:\\mipmap-xhdpi\\ic_launcher_round.webp"
+    },
+    {
+        "merged": "C:\\Users\\phatl\\.gradle\\daemon\\8.11.1\\com.example.todolistse06302.app-debug-36:\\layout_report.xml.flat",
+        "source": "C:\\Users\\phatl\\.gradle\\daemon\\8.11.1\\com.example.todolistse06302.app-main-38:\\layout\\report.xml"
+    },
+    {
+        "merged": "C:\\Users\\phatl\\.gradle\\daemon\\8.11.1\\com.example.todolistse06302.app-debug-36:\\drawable_ic_manage.png.flat",
+        "source": "C:\\Users\\phatl\\.gradle\\daemon\\8.11.1\\com.example.todolistse06302.app-main-38:\\drawable\\ic_manage.png"
+    },
+    {
+        "merged": "C:\\Users\\phatl\\.gradle\\daemon\\8.11.1\\com.example.todolistse06302.app-debug-36:\\drawable_cemnoback.png.flat",
+        "source": "C:\\Users\\phatl\\.gradle\\daemon\\8.11.1\\com.example.todolistse06302.app-main-38:\\drawable\\cemnoback.png"
+    },
+    {
+        "merged": "C:\\Users\\phatl\\.gradle\\daemon\\8.11.1\\com.example.todolistse06302.app-debug-36:\\layout_activity_admin_panel.xml.flat",
+        "source": "C:\\Users\\phatl\\.gradle\\daemon\\8.11.1\\com.example.todolistse06302.app-main-38:\\layout\\activity_admin_panel.xml"
+    },
+    {
+        "merged": "C:\\Users\\phatl\\.gradle\\daemon\\8.11.1\\com.example.todolistse06302.app-debug-36:\\mipmap-anydpi_ic_launcher.xml.flat",
+        "source": "C:\\Users\\phatl\\.gradle\\daemon\\8.11.1\\com.example.todolistse06302.app-main-38:\\mipmap-anydpi\\ic_launcher.xml"
+    },
+    {
+        "merged": "C:\\Users\\phatl\\.gradle\\daemon\\8.11.1\\com.example.todolistse06302.app-debug-36:\\drawable_ic_notification.png.flat",
+        "source": "C:\\Users\\phatl\\.gradle\\daemon\\8.11.1\\com.example.todolistse06302.app-main-38:\\drawable\\ic_notification.png"
+    },
+    {
+        "merged": "C:\\Users\\phatl\\.gradle\\daemon\\8.11.1\\com.example.todolistse06302.app-debug-36:\\mipmap-hdpi_ic_launcher_round.webp.flat",
+        "source": "C:\\Users\\phatl\\.gradle\\daemon\\8.11.1\\com.example.todolistse06302.app-main-38:\\mipmap-hdpi\\ic_launcher_round.webp"
+    },
+    {
+        "merged": "C:\\Users\\phatl\\.gradle\\daemon\\8.11.1\\com.example.todolistse06302.app-debug-36:\\menu_menu_main.xml.flat",
+        "source": "C:\\Users\\phatl\\.gradle\\daemon\\8.11.1\\com.example.todolistse06302.app-main-38:\\menu\\menu_main.xml"
+    },
+    {
+        "merged": "C:\\Users\\phatl\\.gradle\\daemon\\8.11.1\\com.example.todolistse06302.app-debug-36:\\drawable_ic_money.png.flat",
+        "source": "C:\\Users\\phatl\\.gradle\\daemon\\8.11.1\\com.example.todolistse06302.app-main-38:\\drawable\\ic_money.png"
+    },
+    {
+        "merged": "C:\\Users\\phatl\\.gradle\\daemon\\8.11.1\\com.example.todolistse06302.app-debug-36:\\drawable_ic_profile.png.flat",
+        "source": "C:\\Users\\phatl\\.gradle\\daemon\\8.11.1\\com.example.todolistse06302.app-main-38:\\drawable\\ic_profile.png"
+    },
+    {
+        "merged": "C:\\Users\\phatl\\.gradle\\daemon\\8.11.1\\com.example.todolistse06302.app-debug-36:\\drawable_baseline_password_24.xml.flat",
+        "source": "C:\\Users\\phatl\\.gradle\\daemon\\8.11.1\\com.example.todolistse06302.app-main-38:\\drawable\\baseline_password_24.xml"
+    },
+    {
+        "merged": "C:\\Users\\phatl\\.gradle\\daemon\\8.11.1\\com.example.todolistse06302.app-debug-36:\\mipmap-xhdpi_ic_launcher.webp.flat",
+        "source": "C:\\Users\\phatl\\.gradle\\daemon\\8.11.1\\com.example.todolistse06302.app-main-38:\\mipmap-xhdpi\\ic_launcher.webp"
+    },
+    {
+        "merged": "C:\\Users\\phatl\\.gradle\\daemon\\8.11.1\\com.example.todolistse06302.app-debug-36:\\drawable_user.png.flat",
+        "source": "C:\\Users\\phatl\\.gradle\\daemon\\8.11.1\\com.example.todolistse06302.app-main-38:\\drawable\\user.png"
+    },
+    {
+        "merged": "C:\\Users\\phatl\\.gradle\\daemon\\8.11.1\\com.example.todolistse06302.app-debug-36:\\color_selector_bottom_nav.xml.flat",
+        "source": "C:\\Users\\phatl\\.gradle\\daemon\\8.11.1\\com.example.todolistse06302.app-main-38:\\color\\selector_bottom_nav.xml"
+    },
+    {
+        "merged": "C:\\Users\\phatl\\.gradle\\daemon\\8.11.1\\com.example.todolistse06302.app-debug-36:\\layout_budget_item.xml.flat",
+        "source": "C:\\Users\\phatl\\.gradle\\daemon\\8.11.1\\com.example.todolistse06302.app-main-38:\\layout\\budget_item.xml"
+    },
+    {
+        "merged": "C:\\Users\\phatl\\.gradle\\daemon\\8.11.1\\com.example.todolistse06302.app-debug-36:\\menu_adminmenu.xml.flat",
+        "source": "C:\\Users\\phatl\\.gradle\\daemon\\8.11.1\\com.example.todolistse06302.app-main-38:\\menu\\adminmenu.xml"
+    },
+    {
+        "merged": "C:\\Users\\phatl\\.gradle\\daemon\\8.11.1\\com.example.todolistse06302.app-debug-36:\\drawable_ic_budget.png.flat",
+        "source": "C:\\Users\\phatl\\.gradle\\daemon\\8.11.1\\com.example.todolistse06302.app-main-38:\\drawable\\ic_budget.png"
+    },
+    {
+        "merged": "com.example.todolistse06302.app-debug-36:/menu_menu_main.xml.flat",
+        "source": "com.example.todolistse06302.app-main-38:/menu/menu_main.xml"
+    },
+    {
+        "merged": "C:\\Users\\phatl\\.gradle\\daemon\\8.11.1\\com.example.todolistse06302.app-debug-36:\\layout_summary_item.xml.flat",
+        "source": "C:\\Users\\phatl\\.gradle\\daemon\\8.11.1\\com.example.todolistse06302.app-main-38:\\layout\\summary_item.xml"
+    },
+    {
+        "merged": "C:\\Users\\phatl\\.gradle\\daemon\\8.11.1\\com.example.todolistse06302.app-debug-36:\\drawable_lvbd.xml.flat",
+        "source": "C:\\Users\\phatl\\.gradle\\daemon\\8.11.1\\com.example.todolistse06302.app-main-38:\\drawable\\lvbd.xml"
+    },
+    {
+        "merged": "C:\\Users\\phatl\\.gradle\\daemon\\8.11.1\\com.example.todolistse06302.app-debug-36:\\layout_activity_report.xml.flat",
+        "source": "C:\\Users\\phatl\\.gradle\\daemon\\8.11.1\\com.example.todolistse06302.app-main-38:\\layout\\activity_report.xml"
+    },
+    {
+        "merged": "C:\\Users\\phatl\\.gradle\\daemon\\8.11.1\\com.example.todolistse06302.app-debug-36:\\mipmap-mdpi_ic_launcher.webp.flat",
+        "source": "C:\\Users\\phatl\\.gradle\\daemon\\8.11.1\\com.example.todolistse06302.app-main-38:\\mipmap-mdpi\\ic_launcher.webp"
+    },
+    {
+        "merged": "C:\\Users\\phatl\\.gradle\\daemon\\8.11.1\\com.example.todolistse06302.app-debug-36:\\mipmap-xxxhdpi_ic_launcher_round.webp.flat",
+        "source": "C:\\Users\\phatl\\.gradle\\daemon\\8.11.1\\com.example.todolistse06302.app-main-38:\\mipmap-xxxhdpi\\ic_launcher_round.webp"
+    },
+    {
+        "merged": "C:\\Users\\phatl\\.gradle\\daemon\\8.11.1\\com.example.todolistse06302.app-debug-36:\\drawable_ic_home.png.flat",
+        "source": "C:\\Users\\phatl\\.gradle\\daemon\\8.11.1\\com.example.todolistse06302.app-main-38:\\drawable\\ic_home.png"
+    }
+]

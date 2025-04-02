@@ -8,6 +8,7 @@
     <uses-permission android:name="android.permission.INTERNET" />
     <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
     <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
+    <uses-permission android:name="android.permission.POST_NOTIFICATIONS"/>
 
     <application
         android:allowBackup="true"
@@ -23,10 +24,6 @@
             android:name=".Report"
             android:exported="false" />
         <activity
-            android:name=".ViewUserExpenseActivity"
-            android:exported="false" />
-
-        <activity
             android:name=".AdminPanelProfile"
             android:exported="false" />
         <activity
@@ -37,6 +34,9 @@
             android:exported="false" />
         <activity
             android:name=".ManageBudgetActivity"
+            android:exported="false" />
+        <activity
+            android:name=".ViewUserExpenseActivity"
             android:exported="false" />
         <activity
             android:name=".Profile"
@@ -51,11 +51,11 @@
             android:name=".HomeScreen"
             android:exported="false" />
         <activity
+            android:name=".RecurringExpenseActivity"
+            android:exported="false" />
+        <activity
             android:name=".MainActivity"
-
             android:exported="true">
-
-
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 

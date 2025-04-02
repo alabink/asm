@@ -21,7 +21,6 @@ public class ExpenseAdapter extends BaseAdapter {
     public ExpenseAdapter(Context context, List<Expense> expenses) {
         this.context = context;
         this.expenses = expenses;
-        
         // Create currency formatter for VND without scientific notation
         this.currencyFormatter = NumberFormat.getCurrencyInstance(new Locale("vi", "VN"));
         this.decimalFormat = new DecimalFormat("#,###");

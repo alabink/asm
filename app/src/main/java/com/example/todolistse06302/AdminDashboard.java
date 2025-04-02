@@ -44,6 +44,7 @@ public class AdminDashboard extends AppCompatActivity {
             startActivity(new Intent(AdminDashboard.this, ViewUserExpenseActivity.class));
         });
 
+
         // Xử lý sự kiện cho BottomNavigationView
         BottomNavigationView bottomNavigationView = findViewById(R.id.bottomNavigation);
         bottomNavigationView.setOnItemSelectedListener(item -> {
@@ -64,6 +65,8 @@ public class AdminDashboard extends AppCompatActivity {
                 // Chuyển đến Activity ManageBudgetActivity
                 startActivity(new Intent(AdminDashboard.this, AdminDashboard.class));
                 return true;
+
+
             } else if (itemId == R.id.navigation_view_users_expenses) { // Dùng đúng ID
                 startActivity(new Intent(AdminDashboard.this, ViewUserExpenseActivity.class));
                 return true;
