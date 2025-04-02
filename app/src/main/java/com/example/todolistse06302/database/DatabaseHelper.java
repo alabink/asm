@@ -14,11 +14,13 @@ import com.example.todolistse06302.Expense;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.HashMap;
+
 
 public class DatabaseHelper extends SQLiteOpenHelper {
 
     private static final String DATABASE_NAME = "concac";
-    private static final int DATABASE_VERSION = 8;
+    private static final int DATABASE_VERSION = 10;
 
     // User table constants
     public static final String TABLE_USERS = "users";
@@ -161,11 +163,11 @@ public class DatabaseHelper extends SQLiteOpenHelper {
                 // Update remaining budget
                 ContentValues values = new ContentValues();
                 values.put(COLUMN_REMAINING_BUDGET, remainingBudget - amount);
-                
+
                 int result = db.update(TABLE_BUDGETS, values,
                         COLUMN_BUDGET_ID + "=?",
                         new String[]{String.valueOf(budgetId)});
-                
+
                 if (result <= 0) {
                     throw new Exception("Failed to update budget");
                 }
@@ -462,9 +464,9 @@ public Cursor getExpenses(int userId) {
     public Cursor getAllUsers() {
         SQLiteDatabase db = this.getReadableDatabase();
         String[] columns = new String[]{
-            COLUMN_USER_ID,
-            COLUMN_EMAIL,
-            COLUMN_USER_ROLE
+                COLUMN_USER_ID,
+                COLUMN_EMAIL,
+                COLUMN_USER_ROLE
         };
         return db.query(TABLE_USERS,
                 columns,
@@ -477,19 +479,19 @@ public Cursor getExpenses(int userId) {
         try {
             db = this.getWritableDatabase();
             db.beginTransaction();
-            
+
             // Delete user's expenses first
-            db.delete(TABLE_EXPENSES, COLUMN_EXPENSE_USER_ID + " = ?", 
+            db.delete(TABLE_EXPENSES, COLUMN_EXPENSE_USER_ID + " = ?",
                     new String[]{String.valueOf(userId)});
-            
+
             // Delete the user
-            int result = db.delete(TABLE_USERS, COLUMN_USER_ID + " = ?", 
+            int result = db.delete(TABLE_USERS, COLUMN_USER_ID + " = ?",
                     new String[]{String.valueOf(userId)});
-            
+
             if (result != 1) {
                 throw new Exception("Failed to delete user");
             }
-            
+
             db.setTransactionSuccessful();
         } catch (Exception e) {
             Log.e("DatabaseHelper", "Error deleting user", e);
@@ -695,10 +697,10 @@ public Cursor getExpenses(int userId) {
                     int dateColumnIndex = cursor.getColumnIndexOrThrow(COLUMN_DATE);
 
                     Expense expense = new Expense(
-                        cursor.getInt(idColumnIndex),
-                        cursor.getDouble(amountColumnIndex),
-                        cursor.getString(categoryColumnIndex),
-                        cursor.getString(dateColumnIndex)
+                            cursor.getInt(idColumnIndex),
+                            cursor.getDouble(amountColumnIndex),
+                            cursor.getString(categoryColumnIndex),
+                            cursor.getString(dateColumnIndex)
                     );
                     expenses.add(expense);
                 } while (cursor.moveToNext());
@@ -751,9 +753,6 @@ public Cursor getExpenses(int userId) {
 
 
 
-
-
-
 //    public List<String[]> getExpenses(int userId) {
 //        List<String[]> expensesList = new ArrayList<>();
 //        SQLiteDatabase db = this.getReadableDatabase();
@@ -775,7 +774,164 @@ public Cursor getExpenses(int userId) {
 //        db.close();
 //        return expensesList;
 //    }
+    public List<String> getAllUserEmails() {
+        List<String> users = new ArrayList<>();
+        SQLiteDatabase db = this.getReadableDatabase();
+        Cursor cursor = db.rawQuery("SELECT email FROM users", null);
 
+        if (cursor.moveToFirst()) {
+            do {
+                users.add(cursor.getString(0)); // Lấy email
+            } while (cursor.moveToNext());
+        }
+
+        cursor.close();
+        return users;
+    }
+
+    public int getUserIdByEmail(String email) {
+        SQLiteDatabase db = this.getReadableDatabase();
+        Cursor cursor = db.rawQuery("SELECT id FROM users WHERE email = ?", new String[]{email});
+
+        if (cursor.moveToFirst()) {
+            return cursor.getInt(0); // Trả về ID
+        }
+
+        cursor.close();
+        return -1;
+    }
+
+    public List<String> getExpenseSummaryForUser(int userId) {
+        List<String> summaryList = new ArrayList<>();
+        SQLiteDatabase db = this.getReadableDatabase();
+
+        Cursor cursor = db.rawQuery(
+                "SELECT e.category, SUM(e.amount) AS totalSpent, " +
+                        "(b.total_budget - SUM(e.amount)) AS remainingBudget " +
+                        "FROM expenses e " +
+                        "JOIN budgets b ON e.category = b.category AND e.user_id = b.user_id " +
+                        "WHERE e.user_id = ? " +
+                        "GROUP BY e.category, b.total_budget",
+                new String[]{String.valueOf(userId)}
+        );
+
+        if (cursor.moveToFirst()) {
+            do {
+                String category = cursor.getString(0);
+                double totalSpent = cursor.getDouble(1);
+                double remainingBudget = cursor.getDouble(2);
+
+                summaryList.add(category + ": Spent $" + totalSpent + " | Budget Left: $" + remainingBudget);
+            } while (cursor.moveToNext());
+        }
+
+        cursor.close();
+        return summaryList;
+    }
+    public HashMap<String, Double> getTotalExpenseAndBudget(int userId) {
+        SQLiteDatabase db = this.getReadableDatabase();
+        HashMap<String, Double> result = new HashMap<>();
+
+        // Tính tổng số tiền đã chi tiêu
+        Cursor cursor = db.rawQuery(
+                "SELECT IFNULL(SUM(amount), 0) FROM expenses WHERE user_id = ?",
+                new String[]{String.valueOf(userId)}
+        );
+
+        if (cursor.moveToFirst()) {
+            result.put("totalSpent", cursor.getDouble(0));
+        }
+        cursor.close();
+
+        // Tính tổng ngân sách còn lại
+        cursor = db.rawQuery(
+                "SELECT IFNULL(SUM(total_budget - IFNULL(e.amount, 0)), 0) " +
+                        "FROM budgets b " +
+                        "LEFT JOIN expenses e ON b.category = e.category AND b.user_id = e.user_id " +
+                        "WHERE b.user_id = ?",
+                new String[]{String.valueOf(userId)}
+        );
+
+        if (cursor.moveToFirst()) {
+            result.put("remainingBudget", cursor.getDouble(0));
+        }
+        cursor.close();
+
+        return result;
+    }
+    // ham barchart
+    public List<String> getExpenseCategories() {
+        List<String> categories = new ArrayList<>();
+        SQLiteDatabase db = this.getReadableDatabase();
+        Cursor cursor = db.rawQuery("SELECT DISTINCT category FROM expenses", null);
+
+        if (cursor.moveToFirst()) {
+            do {
+                categories.add(cursor.getString(0));
+            } while (cursor.moveToNext());
+        }
+        cursor.close();
+        return categories;
+    }
+
+    public float getTotalExpenseForCategory(int userId, String category) {
+        SQLiteDatabase db = this.getReadableDatabase();
+        Cursor cursor = db.rawQuery("SELECT SUM(amount) FROM expenses WHERE user_id = ? AND category = ?",
+                new String[]{String.valueOf(userId), category});
+
+        float total = 0;
+        if (cursor.moveToFirst()) {
+            total = cursor.getFloat(0);
+        }
+        cursor.close();
+        return total;
+    }
+    public List<String> getExpenseSummaryForUserByCategory(int userId, String category) {
+        List<String> summaryList = new ArrayList<>();
+        SQLiteDatabase db = this.getReadableDatabase();
+
+        Cursor cursor = db.rawQuery(
+                "SELECT e.category, SUM(e.amount) AS totalSpent, " +
+                        "(b.total_budget - SUM(e.amount)) AS remainingBudget " +
+                        "FROM expenses e " +
+                        "JOIN budgets b ON e.category = b.category AND e.user_id = b.user_id " +
+                        "WHERE e.user_id = ? AND e.category = ? " +
+                        "GROUP BY e.category, b.total_budget",
+                new String[]{String.valueOf(userId), category}
+        );
+
+        if (cursor.moveToFirst()) {
+            do {
+                double totalSpent = cursor.getDouble(1);
+                double remainingBudget = cursor.getDouble(2);
+                summaryList.add(category + ": Spent $" + totalSpent + " | Budget Left: $" + remainingBudget);
+            } while (cursor.moveToNext());
+        }
+
+        cursor.close();
+        return summaryList;
+    }
+    public List<String> getExpenseCategoriesForUser(int userId) {
+        List<String> categories = new ArrayList<>();
+
+        // Truy vấn các danh mục chi tiêu mà người dùng đã chi tiền cho
+        SQLiteDatabase db = this.getReadableDatabase();
+        Cursor cursor = db.rawQuery(
+                "SELECT DISTINCT category FROM expenses WHERE user_id = ?",
+                new String[]{String.valueOf(userId)}
+        );
+
+        if (cursor != null && cursor.moveToFirst()) {
+            do {
+                String category = cursor.getString(0); // Lấy danh mục chi tiêu
+                categories.add(category);
+            } while (cursor.moveToNext());
+
+            cursor.close();
+        }
+
+        return categories;
+    }
 
 
 
