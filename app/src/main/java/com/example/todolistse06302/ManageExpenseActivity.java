@@ -83,6 +83,9 @@ public class ManageExpenseActivity extends AppCompatActivity {
         }
         categoryAdapter.notifyDataSetChanged();
     }
+
+
+
     private void setupListeners() {
         editDate.setOnClickListener(v -> showDatePicker());
 

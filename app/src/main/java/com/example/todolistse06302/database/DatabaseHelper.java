@@ -167,6 +167,7 @@ public class DatabaseHelper extends SQLiteOpenHelper {
                 int result = db.update(TABLE_BUDGETS, values,
                         COLUMN_BUDGET_ID + "=?",
                         new String[]{String.valueOf(budgetId)});
+
                 if (result <= 0) {
                     throw new Exception("Failed to update budget");
                 }
@@ -358,7 +359,19 @@ public class DatabaseHelper extends SQLiteOpenHelper {
         }
     }
 
+
+
+
 //     Modified getExpenses to filter by userId
+//    public Cursor getExpenses(int userId) {
+//        SQLiteDatabase db = this.getReadableDatabase();
+//        return db.query(TABLE_EXPENSES,
+//                null,
+//                COLUMN_EXPENSE_USER_ID + " = ?",
+//                new String[]{String.valueOf(userId)},
+//                null, null, COLUMN_DATE + " DESC");
+//    }
+
 public Cursor getExpenses(int userId) {
     SQLiteDatabase db = this.getReadableDatabase();
     return db.query(TABLE_EXPENSES,
@@ -740,6 +753,7 @@ public Cursor getExpenses(int userId) {
         return categories;
     }
 
+
 //    public List<String[]> getExpenses(int userId) {
 //        List<String[]> expensesList = new ArrayList<>();
 //        SQLiteDatabase db = this.getReadableDatabase();
@@ -919,4 +933,14 @@ public Cursor getExpenses(int userId) {
 
         return categories;
     }
+
+
+
+
+
+
+
+
+
+
 }

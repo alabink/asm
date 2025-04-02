@@ -50,14 +50,12 @@
         android:layout_marginTop="16dp"
         android:layout_marginHorizontal="32dp" />
 
-    <!-- Logout Button -->
-
+    <!-- Cost Overview Button -->
     <com.google.android.material.button.MaterialButton
         android:id="@+id/btncost"
-        android:layout_width="343dp"
-        android:layout_height="46dp"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
         android:layout_marginHorizontal="32dp"
-        android:layout_marginStart="32dp"
         android:layout_marginTop="24dp"
         android:backgroundTint="#1A237E"
         android:text="Cost Overview"
@@ -66,8 +64,10 @@
         app:cornerRadius="12dp"
         app:icon="@drawable/ic_manage"
         app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/btnreport" />
 
+    <!-- Expense Report Button -->
     <com.google.android.material.button.MaterialButton
         android:id="@+id/btnreport"
         android:layout_width="0dp"
@@ -75,7 +75,7 @@
         android:layout_marginHorizontal="32dp"
         android:layout_marginTop="80dp"
         android:backgroundTint="#1A237E"
-        android:text="Expense report"
+        android:text="Expense Report"
         android:textColor="@android:color/white"
         android:textSize="16sp"
         app:cornerRadius="12dp"
@@ -84,6 +84,7 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@id/imageView" />
 
+    <!-- Logout Button -->
     <com.google.android.material.button.MaterialButton
         android:id="@+id/btnLogout"
         android:layout_width="0dp"
@@ -100,6 +101,7 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@id/btnManageExpense" />
 
+    <!-- Bottom Navigation -->
     <com.google.android.material.bottomnavigation.BottomNavigationView
         android:id="@+id/bottomNavigation"
         android:layout_width="match_parent"

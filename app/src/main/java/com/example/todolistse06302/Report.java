@@ -113,6 +113,7 @@ public class Report extends AppCompatActivity {
                 double amount = cursor.getDouble(colAmount);
                 String date = cursor.getString(colDate);
                 String key = timePeriod.equals("Monthly") ? date.substring(3, 10) : date.substring(6, 10);
+
                 totalExpense += amount;
                 summaryData.put(key, summaryData.getOrDefault(key, 0.0) + amount);
             } while (cursor.moveToNext());
@@ -128,6 +129,9 @@ public class Report extends AppCompatActivity {
         List<BarEntry> entries = new ArrayList<>();
         List<String> labels = new ArrayList<>();
         int index = 0;
+
+
+
         for (Map.Entry<String, Double> entry : expenseData.entrySet()) {
             entries.add(new BarEntry(index, entry.getValue().floatValue()));
             labels.add(entry.getKey());

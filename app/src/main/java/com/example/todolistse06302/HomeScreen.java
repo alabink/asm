@@ -18,7 +18,9 @@ import com.google.firebase.auth.FirebaseAuth;
 
 public class HomeScreen extends AppCompatActivity {
 
+
     private MaterialButton btnManageExpense, btnLogout, btnReport,btncost;
+
 
     private FirebaseAuth mAuth;
     private SharedPreferences sharedPreferences;
@@ -34,7 +36,11 @@ public class HomeScreen extends AppCompatActivity {
 
         btnManageExpense = findViewById(R.id.btnManageExpense);
         btnLogout = findViewById(R.id.btnLogout);
+
         btncost = findViewById(R.id.btncost);
+
+
+
         btnReport = findViewById(R.id.btnreport);
 
         btnReport.setOnClickListener(view -> {
@@ -47,10 +53,13 @@ public class HomeScreen extends AppCompatActivity {
             Intent intent = new Intent(HomeScreen.this, ManageExpenseActivity.class);
             startActivity(intent);
         });
+
         btncost.setOnClickListener(view -> {
             Intent intent = new Intent(HomeScreen.this, CostOverview.class);
             startActivity(intent);
         });
+
+
 
         btnLogout.setOnClickListener(v -> showLogoutConfirmation());
 
@@ -59,7 +68,9 @@ public class HomeScreen extends AppCompatActivity {
 
         bottomNavigationView.setOnItemSelectedListener(item -> {
             int itemId = item.getItemId();
+
             if (itemId == R.id.navigation_home) {// Hiện tại đã ở Home, không cần làm gì
+
                 return true;
             } else if (itemId == R.id.navigation_expenses) {
                 // Chuyển đến Activity Manage Expense
@@ -83,13 +94,22 @@ public class HomeScreen extends AppCompatActivity {
                 .setTitle("Logout")
                 .setMessage("Are you sure you want to logout?")
                 .setPositiveButton("Yes", (dialog, which) -> {
+
+                    // Clear SharedPreferences
+
                     SharedPreferences.Editor editor = sharedPreferences.edit();
                     editor.clear();
                     editor.apply();
 
+
+                    // Sign out from Firebase
+
                     if (mAuth.getCurrentUser() != null) {
                         mAuth.signOut();
                     }
+
+
+                    // Return to login screen
 
                     Intent intent = new Intent(HomeScreen.this, MainActivity.class);
                     intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
@@ -100,3 +120,4 @@ public class HomeScreen extends AppCompatActivity {
                 .show();
     }
 }
+
